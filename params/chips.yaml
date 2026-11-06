@@ -2,7 +2,7 @@
 
 hermes:
   # Le Gallo et al., "A 64-core mixed-signal in-memory compute chip based on phase-change memory for deep
-  # neural network inference", Nature Electronics 6, 680 (2023), DOI 10.1038/s41928-023-01010-1, arXiv:2212.02872.
+  # neural network inference", Nature Electronics 6, 680 (2023), DOI 10.1038/s41928-023-01010-1.
   # Primary validation target: Table I gives measured energy and RTL latency in one place.
   # Consistency check (ours): 64 x 256 x 256 MAC x 2 = 8.39 M op; / 133 ns = 63.1 TOPS; / 9.76 TOPS/W = 0.86 uJ. Matches.
   process: {value: 14, unit: "nm", label: published, source: "Le Gallo 2023, abstract; Methods"}

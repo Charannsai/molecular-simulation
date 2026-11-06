@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# E11: task accuracy of Qwen2.5 models on emulated molecular crossbar tiles (Section 6.2 of the paper).
+# E11: task accuracy of Qwen2.5 models on emulated molecular crossbar tiles.
 # Run inside WSL2 or Linux from the repository root, after accuracy/setup_wsl.sh:
 #   bash accuracy/run_e11.sh [diag|exam|size|bits|rows|all]
 # Every run skips itself when its result file already exists, so the script can be restarted.
@@ -17,7 +17,7 @@ run() {  # tag, then arguments for bench_tasks.py
   $PY accuracy/bench_tasks.py --tag "$tag" "$@" || echo "FAILED $tag"
 }
 S="--model $M --tasks arc_easy,mmlu,wikitext --n 200"
-if [[ $what == diag || $what == all ]]; then   # Table 4: what causes the loss
+if [[ $what == diag || $what == all ]]; then   # diagnostics: what causes the loss
   run d200 $S --mode digital
   run R_full $S --mode chip --head digital --seed 0
   run A_circuits_only $S --mode chip --head digital --seed 0 --ideal-devices
@@ -25,14 +25,14 @@ if [[ $what == diag || $what == all ]]; then   # Table 4: what causes the loss
   run C_tile_scaling $S --mode chip --head digital --seed 0 --tile-scaling
 fi
 X="--model $M --tasks arc_easy,arc_challenge,hellaswag,mmlu,wikitext --n 2000"
-if [[ $what == exam || $what == all ]]; then   # Table 5: up to 2,000 questions per task
+if [[ $what == exam || $what == all ]]; then   # larger sets: up to 2,000 questions per task
   run X2000_digital $X --mode digital
   run X2000_C $X --mode chip --head digital --seed 0 --tile-scaling
 fi
-if [[ $what == rows || $what == all ]]; then   # Table 5, last row: 512-row tiles
+if [[ $what == rows || $what == all ]]; then   # 512-row tiles
   run X2000_C_R512 $X --mode chip --head digital --seed 0 --tile-scaling --rows 512
 fi
-if [[ $what == size || $what == all ]]; then   # Table 6: model size (3B needs about 16 GB of GPU memory)
+if [[ $what == size || $what == all ]]; then   # model size (3B needs about 16 GB of GPU memory)
   for s in 1.5B 3B; do
     Q="--model Qwen/Qwen2.5-$s-Instruct --tasks arc_easy,mmlu,wikitext --n 200 --dtype auto"
     run "size_${s}_digital" $Q --mode digital
@@ -40,7 +40,7 @@ if [[ $what == size || $what == all ]]; then   # Table 6: model size (3B needs a
     run "size_${s}_C" $Q --mode chip --head digital --seed 0 --tile-scaling
   done
 fi
-if [[ $what == bits || $what == all ]]; then   # Figure 9: converter resolution
+if [[ $what == bits || $what == all ]]; then   # converter resolution
   B="$S --mode chip --head digital --seed 0 --tile-scaling"
   for ib in 6 7 10; do run "BITS_in${ib}_out12" $B --input-bits $ib; done
   for ob in 8 9 10 14; do run "BITS_in8_out${ob}" $B --output-bits $ob; done

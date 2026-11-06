@@ -2,11 +2,7 @@
 
 **An open, labelled-parameter simulator for molecular memristor compute-in-memory (CIM) and local LLM inference.**
 
-This repository holds the code, parameters, results and figures behind the preprint
-
-> C. S. Pathuri, *How Far Can Molecular Memristor Compute-in-Memory Take Local LLM Inference? A Break-Even Study with Measured Baselines and Emulated Task Accuracy*, arXiv preprint, 2026.
-
-It answers one question: **what must molecular compute-in-memory achieve, at the device and circuit level, to beat optimised digital inference for dense 8B language models at batch size one?**
+This repository holds the code, parameters, results and figures of a break-even study. It answers one question: **what must molecular compute-in-memory achieve, at the device and circuit level, to beat optimised digital inference for dense 8B language models at batch size one?**
 
 Everything outside the measured GPU baseline is a model estimate. Nothing here is a fabricated chip.
 
@@ -37,7 +33,7 @@ experiments/     one script per experiment: E2 to E10, E12, E17 and E17b
 accuracy/        analog accuracy emulator, GPT-2 study (E7), Qwen2.5 task benchmarks (E11), drift (E13)
 neurosim/        probe that drives the DNN+NeuroSim SAR converter model directly (E20)
 report/          scripts that draw the figures
-results/         every result file (JSON, CSV) and figure used in the paper
+results/         every result file (JSON, CSV) and figure of the study
 tests/           unit tests for the simulator
 docs/            detailed documentation (start with docs/OVERVIEW.md)
 ```
@@ -64,7 +60,7 @@ The accuracy experiments need PyTorch, AIHWKit and a CUDA GPU (Linux or WSL2). S
 | [docs/MODEL.md](docs/MODEL.md) | The digital model, the CIM tile and system model, area and IR drop, with equations |
 | [docs/PARAMETERS.md](docs/PARAMETERS.md) | The labelled parameter registers and the rules for numbers |
 | [docs/ACCURACY.md](docs/ACCURACY.md) | The analog emulator, the GPT-2 study, the Qwen2.5 task benchmarks and diagnostics |
-| [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md) | Every experiment: question, script, outputs and key result, mapped to the paper |
+| [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md) | Every experiment: question, script, outputs and key result |
 | [docs/REPRODUCE.md](docs/REPRODUCE.md) | Environment setup and step-by-step reproduction, including Colab and NeuroSim |
 
 ## Rules for numbers
@@ -80,11 +76,11 @@ A result is only as strong as its weakest input.
 
 ## Scope of this release
 
-This release covers the break-even study, the validation and the accuracy study in the paper. Accelerator-level design studies (packaging, partitioning and cost) are not part of it.
+This release covers the break-even study, the validation and the accuracy study. Accelerator-level design studies (packaging, partitioning and cost) are not part of it.
 
 ## Citation
 
-If you use this code or its results, please cite the preprint (see [CITATION.cff](CITATION.cff)).
+If you use this code or its results, please cite this repository (see [CITATION.cff](CITATION.cff)).
 
 ## License
 

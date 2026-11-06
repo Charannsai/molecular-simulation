@@ -1,4 +1,4 @@
-"""Experiment E10: the break-even map (all hypotheses; the paper's main figure).
+"""Experiment E10: the break-even map (all hypotheses; the main figure).
 
     uv run python experiments/e10_breakeven.py
 

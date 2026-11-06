@@ -27,7 +27,7 @@ Validation: on GPT-2 the analog layer reproduces AIHWKit within 1% (converters o
 ```bash
 python accuracy/bench_tasks.py --model Qwen/Qwen2.5-0.5B-Instruct --mode digital --n 200
 python accuracy/bench_tasks.py --model Qwen/Qwen2.5-0.5B-Instruct --mode chip --head digital --tile-scaling --n 200
-bash accuracy/run_e11.sh all      # every E11 run in the paper (skips runs whose results exist)
+bash accuracy/run_e11.sh all      # every E11 run (skips runs whose results exist)
 ```
 
 Sampling error is about plus or minus 3.5 points at 200 questions and plus or minus 1 point at 2,000.
@@ -72,4 +72,4 @@ The 3B runs used a free Colab T4 (`accuracy/make_colab_bundle.py` builds the not
 
 ## Result files
 
-`results/E11_tasks/<model>_<mode>[_<head>head_s<seed>]_<tag>.json` holds the task scores, settings and run time. The file names used in the paper: `d200`, `R_full`, `A_circuits_only`, `B_molecules_only`, `C_tile_scaling`, `X2000_*`, `Q15_*` (1.5B), `colab*` (3B), `BITS_*`, `R512_*`. Runs tagged `CD` include a lightweight digital correction whose training code is not part of this release.
+`results/E11_tasks/<model>_<mode>[_<head>head_s<seed>]_<tag>.json` holds the task scores, settings and run time. The file names of the reported runs: `d200`, `R_full`, `A_circuits_only`, `B_molecules_only`, `C_tile_scaling`, `X2000_*`, `Q15_*` (1.5B), `colab*` (3B), `BITS_*`, `R512_*`. Runs tagged `CD` include a lightweight digital correction whose training code is not part of this release.

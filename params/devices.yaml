@@ -69,7 +69,7 @@ molecular:
     {value: 99, unit: "percent", label: assumed, source: "project assumption", note: "only 64 x 64 shown", range: [90, 99.9]}
 
 pcm:
-  # IBM 14 nm PCM as used in HERMES (Le Gallo et al., Nature Electronics 2023, arXiv:2212.02872)
+  # IBM 14 nm PCM as used in HERMES (Le Gallo et al., Nature Electronics 2023)
   # and 90 nm PCM in Joshi et al., Nature Communications 11, 2473 (2020).
   g_min:
     {value: 0.1, unit: "uS", label: published, source: "Le Gallo 2023, Extended Data Table I", note: "resistance range 100 kohm to 10 Mohm"}
