@@ -1,0 +1,44 @@
+# Baseline systems. This PC's GPU is measured; everything else is published and labelled so.
+
+rtx5050_laptop:
+  vram:
+    {value: 8151, unit: "MiB", label: measured, source: "nvidia-smi on the author's PC, 29 Oct 2026"}
+  memory_bandwidth:
+    {value: 367.3, unit: "GB/s", label: measured, source: "E0, results/E0_bandwidth.json, 29 Oct 2026", note: "read-only median of 30 runs; copy (read + write) measured 337.3 GB/s"}
+  idle_power:
+    {value: 8.1, unit: "W", label: measured, source: "E1, results/E1_baseline.json, 29 Oct 2026", note: "GPU board power, no model loaded"}
+  # Decode speed, power and energy per token per model are in results/E1_baseline.json (experiment E1).
+
+rtx4090:
+  vram: {value: 24, unit: "GB", label: published, source: "NVIDIA RTX 4090 specifications"}
+  memory_bandwidth: {value: 1008, unit: "GB/s", label: published, source: "NVIDIA RTX 4090 specifications (21 Gbps x 384-bit)"}
+  board_power: {value: 450, unit: "W", label: published, source: "NVIDIA RTX 4090 specifications (total graphics power)"}
+
+ryzen_ai_max_395:
+  memory: {value: 128, unit: "GB", label: published, source: "AMD Ryzen AI Max+ 395 product page", note: "maximum configuration, shared by CPU, GPU and NPU"}
+  memory_bandwidth: {value: 256, unit: "GB/s", label: published, source: "AMD: LPDDR5X-8000, 256-bit interface", note: "theoretical"}
+  package_power: {value: 120, unit: "W", label: published, source: "AMD configurable TDP 45 to 120 W", range: [45, 120]}
+
+h200:
+  memory: {value: 141, unit: "GB", label: published, source: "NVIDIA H200 datasheet (dossier)"}
+  memory_bandwidth: {value: 4.8, unit: "TB/s", label: published, source: "NVIDIA H200 datasheet (dossier)"}
+  board_power: {value: 700, unit: "W", label: published, source: "NVIDIA H200 product page (nvidia.com/h200): up to 700 W, SXM, configurable"}
+  decode_power: {value: 450, unit: "W", label: assumed, source: "project assumption: board power while decoding at batch 1, below the 700 W maximum", range: [300, 700]}
+
+rtx4090_decode:
+  decode_power: {value: 300, unit: "W", label: assumed, source: "project assumption: board power while decoding an 8B model at batch 1 (450 W maximum, published)", range: [200, 450]}
+
+m4_max:
+  memory: {value: 128, unit: "GB", label: published, source: "Apple M4 Max launch (October 2024): up to 128 GB unified memory"}
+  memory_bandwidth: {value: 546, unit: "GB/s", label: published, source: "Apple M4 Max launch: up to 546 GB/s (16-core CPU version; 410 GB/s on the 14-core)"}
+  decode_power: {value: 70, unit: "W", label: assumed, source: "project assumption: package power while decoding; Apple publishes no TDP", range: [40, 100]}
+
+groqchip_v1:
+  sram: {value: 230, unit: "MB", label: published, source: "GroqChip Processor Product Brief v1.7 (groq.com)"}
+  sram_bandwidth: {value: 80, unit: "TB/s", label: published, source: "GroqChip Processor Product Brief v1.7: up to 80 TB/s on-die memory bandwidth"}
+  int8_tops: {value: 750, unit: "Top/s", label: published, source: "GroqChip Processor Product Brief v1.7"}
+  average_power: {value: 185, unit: "W", label: published, source: "GroqChip brief as listed by flopper.io (average 185 W, TDP 215 W, max 300 W) (verify against the brief)", range: [185, 300]}
+  hop_latency: {value: 1, unit: "us", label: assumed, source: "project assumption: chip-to-chip hop in a pipelined Groq system", range: [0.3, 3]}
+
+software:
+  best_utilisation: {value: 0.85, unit: "", label: assumed, source: "project assumption: best-tuned decode software reaches about 85% of memory bandwidth (our measured Ollama runs reach 67 to 72%, E2)", range: [0.75, 0.92]}

@@ -1,0 +1,111 @@
+{
+  "experiment": "E3",
+  "title": "CIM tile model validation against published chips (IBM HERMES, NeuRRAM)",
+  "label": "estimated (model) vs published (chip data)",
+  "tolerance_pct": 30.0,
+  "passed": false,
+  "hermes_passed": true,
+  "cross_chip_passed": false,
+  "v4_alternative_not_predefined_nJ": 13.437499999999998,
+  "context": {
+    "date": "2026-10-29T10:02:08+00:00",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5050 Laptop GPU",
+      "driver": "592.82",
+      "memory_total": "8151 MiB",
+      "max_memory_clock": "12001 MHz",
+      "max_graphics_clock": "3090 MHz"
+    },
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "on_mains_power": false
+  },
+  "assumptions": {
+    "g_mean_uS": [
+      2,
+      0.5,
+      5
+    ],
+    "input_duty": [
+      0.25,
+      0.1,
+      0.5
+    ]
+  },
+  "calibration": {
+    "hermes_core_mvm_energy_nJ": 13.437499999999998,
+    "array_energy_nJ": 1.0485760000000004,
+    "array_share_pct": 7.803356279069771,
+    "array_share_range_pct": [
+      0.12485370046511632,
+      99.88296037209304
+    ],
+    "periph_energy_per_output_pJ": 48.394234374999996
+  },
+  "checks": [
+    {
+      "id": "V1",
+      "what": "HERMES 1-phase MVM latency (first principles)",
+      "pred": 128.0,
+      "actual": 133,
+      "unit": "ns",
+      "error_pct": -3.7593984962406015,
+      "pass": true
+    },
+    {
+      "id": "V2",
+      "what": "HERMES 4-phase MVM latency (first principles)",
+      "pred": 512.0,
+      "actual": 520,
+      "unit": "ns",
+      "error_pct": -1.5384615384615385,
+      "pass": true
+    },
+    {
+      "id": "V3",
+      "what": "HERMES 4-phase MVM energy (from 1-phase calibration)",
+      "pred": 3.4399999999999995,
+      "actual": 3.38,
+      "unit": "uJ",
+      "error_pct": 1.7751479289940715,
+      "pass": true
+    },
+    {
+      "id": "V4",
+      "what": "NeuRRAM 256x256 MVM energy at 8-bit inputs (HERMES per-output energy, no bit scaling)",
+      "pred": 12.388923999999998,
+      "actual": 18.72457142857143,
+      "unit": "nJ",
+      "error_pct": -33.8360076904297,
+      "pass": false
+    }
+  ],
+  "v4_bit_scaling_variants_nJ": {
+    "none": 12.388923999999998,
+    "linear": 10.324103333333332,
+    "walden": 3.0972309999999994
+  },
+  "neurram_operating_points": [
+    {
+      "bits_in_w_out": "1/4/3",
+      "energy_per_mvm_nJ": 3.0481860465116277,
+      "latency_us": 1.4
+    },
+    {
+      "bits_in_w_out": "2/4/5",
+      "energy_per_mvm_nJ": 3.2768,
+      "latency_us": 1.6
+    },
+    {
+      "bits_in_w_out": "4/4/6",
+      "energy_per_mvm_nJ": 8.192,
+      "latency_us": 3.9
+    },
+    {
+      "bits_in_w_out": "8/4/10",
+      "energy_per_mvm_nJ": 18.72457142857143,
+      "latency_us": 10.7
+    }
+  ],
+  "hermes_ops_per_core_mvm": 131072
+}

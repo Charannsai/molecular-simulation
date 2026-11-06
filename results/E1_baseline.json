@@ -1,0 +1,262 @@
+{
+  "experiment": "E1",
+  "title": "Baseline LLM inference on the author's PC (Ollama, GPU)",
+  "label": "measured",
+  "method": "Ollama 0.40.12, 5 runs after 1 warm-up, 128 generated tokens, temperature 0, num_ctx 4096, nvidia-smi board power every 100 ms aligned to Ollama's eval timings; medians reported",
+  "context": {
+    "date": "2026-10-29T08:34:25+00:00",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5050 Laptop GPU",
+      "driver": "592.82",
+      "memory_total": "8151 MiB",
+      "max_memory_clock": "12001 MHz",
+      "max_graphics_clock": "3090 MHz"
+    },
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "on_mains_power": true
+  },
+  "idle_power_W": {
+    "median": 8.12,
+    "min": 8.05,
+    "max": 8.3,
+    "spread_pct": 3.078817733990148,
+    "n": 55
+  },
+  "models": {
+    "llama3.2:3b-instruct-q8_0": {
+      "model": "Llama-3.2-3B",
+      "quantisation": "Q8_0 (8-bit)",
+      "load_s": 29.7897262,
+      "gpu_share": 1.0,
+      "decode_tok_s": {
+        "median": 75.5966376033031,
+        "min": 75.34051854289083,
+        "max": 76.24248445665913,
+        "spread_pct": 1.1931296713240105,
+        "n": 5
+      },
+      "prefill_tok_s": {
+        "median": 1551.885464766875,
+        "min": 1514.015778419338,
+        "max": 4333.832573850419,
+        "spread_pct": 181.70263588715778,
+        "n": 5
+      },
+      "decode_power_W": {
+        "median": 57.907500000000006,
+        "min": 52.277499999999996,
+        "max": 66.261875,
+        "spread_pct": 24.149505677157546,
+        "n": 5
+      },
+      "decode_J_per_token": {
+        "median": 0.7619491470117188,
+        "min": 0.6938829332617187,
+        "max": 0.8765188122216797,
+        "spread_pct": 23.969562755761192,
+        "n": 5
+      },
+      "vram_MiB": {
+        "median": 3921.0,
+        "min": 3921.0,
+        "max": 3921.0,
+        "spread_pct": 0.0,
+        "n": 5
+      },
+      "prompt_tokens": {
+        "median": 408,
+        "min": 408,
+        "max": 408,
+        "spread_pct": 0.0,
+        "n": 5
+      },
+      "generated_tokens": {
+        "median": 128,
+        "min": 128,
+        "max": 128,
+        "spread_pct": 0.0,
+        "n": 5
+      },
+      "runs": [
+        {
+          "prompt_tokens": 408,
+          "generated_tokens": 128,
+          "prefill_tok_s": 4333.832573850419,
+          "decode_tok_s": 75.5966376033031,
+          "decode_power_W": 66.261875,
+          "prefill_power_W": 13.29,
+          "decode_J_per_token": 0.8765188122216797,
+          "power_samples_in_decode": 16,
+          "vram_MiB": 3921.0,
+          "wall_s": 3.9231019020080566
+        },
+        {
+          "prompt_tokens": 408,
+          "generated_tokens": 128,
+          "prefill_tok_s": 1541.5714204749402,
+          "decode_tok_s": 75.99916638414372,
+          "decode_power_W": 57.907500000000006,
+          "prefill_power_W": 8.84,
+          "decode_J_per_token": 0.7619491470117188,
+          "power_samples_in_decode": 16,
+          "vram_MiB": 3921.0,
+          "wall_s": 4.062502861022949
+        },
+        {
+          "prompt_tokens": 408,
+          "generated_tokens": 128,
+          "prefill_tok_s": 1551.885464766875,
+          "decode_tok_s": 75.50820561828243,
+          "decode_power_W": 59.369375,
+          "prefill_power_W": 8.6,
+          "decode_J_per_token": 0.7862638836914062,
+          "power_samples_in_decode": 16,
+          "vram_MiB": 3921.0,
+          "wall_s": 4.127007007598877
+        },
+        {
+          "prompt_tokens": 408,
+          "generated_tokens": 128,
+          "prefill_tok_s": 4097.414009540547,
+          "decode_tok_s": 75.34051854289083,
+          "decode_power_W": 52.277499999999996,
+          "prefill_power_W": 13.26,
+          "decode_J_per_token": 0.6938829332617187,
+          "power_samples_in_decode": 16,
+          "vram_MiB": 3921.0,
+          "wall_s": 3.9164061546325684
+        },
+        {
+          "prompt_tokens": 408,
+          "generated_tokens": 128,
+          "prefill_tok_s": 1514.015778419338,
+          "decode_tok_s": 76.24248445665913,
+          "decode_power_W": 55.055625,
+          "prefill_power_W": 13.19,
+          "decode_J_per_token": 0.7221121582324219,
+          "power_samples_in_decode": 16,
+          "vram_MiB": 3921.0,
+          "wall_s": 4.05974268913269
+        }
+      ]
+    },
+    "llama3.1:8b-instruct-q4_K_M": {
+      "model": "Llama-3.1-8B",
+      "quantisation": "Q4_K_M (about 4.5-bit)",
+      "load_s": 4.126072,
+      "gpu_share": 1.0,
+      "decode_tok_s": {
+        "median": 52.847205105370314,
+        "min": 51.0310871016934,
+        "max": 53.794961345378354,
+        "spread_pct": 5.229934559782592,
+        "n": 5
+      },
+      "prefill_tok_s": {
+        "median": 1672.0202514412133,
+        "min": 986.3962652477286,
+        "max": 1737.2085313294285,
+        "spread_pct": 44.90449594940793,
+        "n": 5
+      },
+      "decode_power_W": {
+        "median": 55.95761904761905,
+        "min": 53.48478260869565,
+        "max": 70.37391304347825,
+        "spread_pct": 30.182003312918333,
+        "n": 5
+      },
+      "decode_J_per_token": {
+        "median": 1.051941607927989,
+        "min": 1.0154996890964674,
+        "max": 1.3269430145380432,
+        "spread_pct": 29.606522177122187,
+        "n": 5
+      },
+      "vram_MiB": {
+        "median": 5179.0,
+        "min": 5179.0,
+        "max": 5179.0,
+        "spread_pct": 0.0,
+        "n": 5
+      },
+      "prompt_tokens": {
+        "median": 393,
+        "min": 393,
+        "max": 393,
+        "spread_pct": 0.0,
+        "n": 5
+      },
+      "generated_tokens": {
+        "median": 128,
+        "min": 128,
+        "max": 128,
+        "spread_pct": 0.0,
+        "n": 5
+      },
+      "runs": [
+        {
+          "prompt_tokens": 393,
+          "generated_tokens": 128,
+          "prefill_tok_s": 1697.7048585461944,
+          "decode_tok_s": 52.847205105370314,
+          "decode_power_W": 55.59217391304348,
+          "prefill_power_W": 13.79,
+          "decode_J_per_token": 1.051941607927989,
+          "power_samples_in_decode": 23,
+          "vram_MiB": 5179.0,
+          "wall_s": 4.777349233627319
+        },
+        {
+          "prompt_tokens": 393,
+          "generated_tokens": 128,
+          "prefill_tok_s": 1672.0202514412133,
+          "decode_tok_s": 52.66843819153042,
+          "decode_power_W": 53.48478260869565,
+          "prefill_power_W": 13.46,
+          "decode_J_per_token": 1.0154996890964674,
+          "power_samples_in_decode": 23,
+          "vram_MiB": 5179.0,
+          "wall_s": 4.772619247436523
+        },
+        {
+          "prompt_tokens": 393,
+          "generated_tokens": 128,
+          "prefill_tok_s": 1138.3814128095428,
+          "decode_tok_s": 53.794961345378354,
+          "decode_power_W": 55.95761904761905,
+          "prefill_power_W": 10.215,
+          "decode_J_per_token": 1.040201863671875,
+          "power_samples_in_decode": 21,
+          "vram_MiB": 5179.0,
+          "wall_s": 4.891010761260986
+        },
+        {
+          "prompt_tokens": 393,
+          "generated_tokens": 128,
+          "prefill_tok_s": 1737.2085313294285,
+          "decode_tok_s": 51.0310871016934,
+          "decode_power_W": 58.153913043478255,
+          "prefill_power_W": 13.54,
+          "decode_J_per_token": 1.1395781737432062,
+          "power_samples_in_decode": 23,
+          "vram_MiB": 5179.0,
+          "wall_s": 4.862915754318237
+        },
+        {
+          "prompt_tokens": 393,
+          "generated_tokens": 128,
+          "prefill_tok_s": 986.3962652477286,
+          "decode_tok_s": 53.034615859504676,
+          "decode_power_W": 70.37391304347825,
+          "prefill_power_W": 8.88,
+          "decode_J_per_token": 1.3269430145380432,
+          "power_samples_in_decode": 23,
+          "vram_MiB": 5179.0,
+          "wall_s": 4.956604719161987
+        }
+      ]
+    }
+  }
+}

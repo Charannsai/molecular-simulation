@@ -1,0 +1,91 @@
+# Accelerator-card scenarios for the comparisons and sweeps.
+# Every card shares the same converters, digital core, memory and link, so differences between
+# scenarios come from the memory device alone. Nominal values here; ranges are swept in M7.
+
+common:
+  tile_rows: {value: 256, unit: "", label: assumed, source: "design choice, as IBM HERMES", range: [64, 1024]}
+  tile_cols: {value: 256, unit: "", label: assumed, source: "design choice, as IBM HERMES", range: [64, 1024]}
+  input_bits: {value: 8, unit: "", label: assumed, source: "design choice: 8-bit activations", range: [4, 8]}
+  output_bits: {value: 12, unit: "", label: assumed, source: "design choice: HERMES-class 12-bit converters", range: [8, 12]}
+  t_lsb: {value: 1, unit: "ns", label: published, source: "IBM HERMES pulse-width inputs, 1 ns per step (Le Gallo 2023)"}
+  periph_energy_per_output:
+    {value: 48.4, unit: "pJ", label: estimated, source: "E3 calibration on IBM HERMES (12-bit outputs, 8-bit inputs)", note: "NeuRRAM implies about 73 pJ; E3 cross-chip check missed by 34%", range: [48.4, 73]}
+  periph_area_per_output:
+    {value: 5438, unit: "um**2", label: estimated, source: "IBM HERMES core area 1.392 mm2 / 256 outputs (Le Gallo 2023, Extended Data Table I)", note: "everything in a 14 nm core except the PCM array: ADC, drivers, local digital. NeuRRAM neuron is 1,270 um2 at 130 nm; 500 um2 is an aggressive assumption", range: [500, 5438]}
+  column_area_fraction:
+    {value: 0.2, unit: "", label: assumed, source: "project assumption: share of per-output periphery that stays per column when converters are shared", range: [0.1, 0.4]}
+  t_conv_shared:
+    {value: 5, unit: "ns", label: estimated, source: "1 / 200 MS/s, 11.5-bit SAR in the Murmann survey (ISSCC 2024, circuits.yaml)", note: "only charged when converters are shared; with one converter per column conversion overlaps (HERMES)", range: [2, 20]}
+  wire_resistance_per_cell:
+    {value: 0.46, unit: "ohm", label: assumed, source: "Sharma 2024 SI row-wire value, applied to every device and pitch", note: "resistance per cell is about constant when width and pitch shrink together at fixed thickness", range: [0.1, 5]}
+  ir_drop_limit:
+    {value: 0.1, unit: "", label: assumed, source: "project assumption: above 10% of the read voltage the result needs compensation", range: [0.05, 0.2]}
+  g_mean_fraction:
+    {value: 0.25, unit: "", label: assumed, source: "mean read conductance as a fraction of the window top", range: [0.1, 0.5]}
+  input_duty:
+    {value: 0.25, unit: "", label: assumed, source: "mean input magnitude / full scale (as E3)", range: [0.1, 0.5]}
+  kv_bandwidth: {value: 136, unit: "GB/s", label: estimated, source: "LPDDR5X-8533, 128-bit (circuits.yaml)", range: [68, 544]}
+  kv_energy_per_bit: {value: 5, unit: "pJ/bit", label: assumed, source: "circuits.yaml (no open LPDDR5X figure)", range: [2, 10]}
+  kv_bytes_per_value: {value: 2, unit: "", label: assumed, source: "design choice: FP16 KV cache", range: [1, 2]}
+  digital_energy_per_op: {value: 0.5, unit: "pJ/op", label: assumed, source: "project assumption for a small modern digital core", note: "Horowitz 2014 gives about 1 pJ for a 32-bit add at 45 nm", range: [0.1, 2]}
+  digital_throughput: {value: 1, unit: "Top/s", label: assumed, source: "project assumption: small on-card digital core", range: [0.25, 4]}
+  static_power: {value: 1, unit: "W", label: assumed, source: "project assumption: controller, leakage, LPDDR refresh", range: [0.5, 3]}
+  link_latency: {value: 2, unit: "us", label: assumed, source: "project assumption: one PCIe round trip with driver overhead", range: [1, 10]}
+  link_energy_per_bit: {value: 11.4, unit: "pJ/bit", label: published, source: "Intel PCIe Gen 5 SerDes, CICC 2020 (verify)"}
+  host_power_gpu_attention:
+    {value: 8.1, unit: "W", label: measured, source: "E1: RTX 5050 Laptop idle power", note: "minimum cost of keeping the GPU on for attention; its attention arithmetic is extra"}
+  overhead_energy_fraction:
+    {value: 0.15, unit: "", label: estimated, source: "IBM HERMES Table I: ResNet-9 layer and LSTM timestep energy per op vs MVM-only (x1.23 and x1.06)", note: "on-chip links and digital units; a 100k-tile LLM card may need more", range: [0.06, 0.23]}
+  overhead_latency_fraction:
+    {value: 0.10, unit: "", label: estimated, source: "IBM HERMES Table I: ResNet-9 layer and LSTM timestep time vs MVM-only (x1.16 and x1.03)", note: "routing across a much larger card may cost more", range: [0.03, 0.16]}
+  parallel_tile_writes: {value: 1000, unit: "", label: assumed, source: "project assumption: tiles programmed at once during install (power limited)", range: [100, 10000]}
+
+scenarios:
+  molecular_demonstrated:
+    label_text: "Molecular, as demonstrated (6 mS window, 1.1 um cells)"
+    device: molecular
+    g_max: {ref: "devices.molecular.g_max"}
+    read_voltage: {ref: "devices.molecular.read_voltage"}
+    devices_per_weight: {value: 2, unit: "", label: assumed, source: "design choice: one device per sign (14-bit cells hold an 8-bit weight)", range: [1, 2]}
+    device_pitch: {value: 1.1, unit: "um", label: published, source: "Sharma 2024 cell 1.05 x 1.1 um", note: "cell size used as pitch (pitch not stated)"}
+    program_iterations: {ref: "devices.molecular.program_verify_iterations"}
+    t_program_pulse: {ref: "devices.molecular.write_pulse_width"}
+    parallel_writes: {value: 1, unit: "", label: published, source: "Sharma 2024 SI: each element written individually"}
+    stacked: true  # selector-less (830 mV write threshold), so the film can sit on top of the CMOS
+
+  molecular_scaled:
+    label_text: "Molecular, scaled (10 uS window, 100 nm pitch)"
+    device: molecular
+    g_max: {ref: "devices.molecular.g_max_scaled"}
+    read_voltage: {ref: "devices.molecular.read_voltage"}
+    devices_per_weight: {value: 2, unit: "", label: assumed, source: "design choice: one device per sign", range: [1, 2]}
+    device_pitch: {ref: "devices.molecular.device_pitch"}
+    program_iterations: {ref: "devices.molecular.program_verify_iterations"}
+    t_program_pulse: {ref: "devices.molecular.write_pulse_width"}
+    parallel_writes: {value: 1, unit: "", label: published, source: "Sharma 2024 SI: each element written individually"}
+    stacked: true
+
+  pcm:
+    label_text: "PCM (HERMES-like)"
+    device: pcm
+    g_max: {ref: "devices.pcm.g_max"}
+    read_voltage: {ref: "chips.hermes.read_voltage"}
+    devices_per_weight: {ref: "devices.pcm.devices_per_weight"}
+    device_pitch: {value: 300, unit: "nm", label: assumed, source: "project assumption: 1T1R cell of about 0.1 um2 at 14 nm (not reported)", range: [100, 1000]}
+    stacked: false  # each device needs an access transistor, so the array sits beside the periphery
+    program_iterations: {ref: "devices.pcm.program_verify_iterations"}
+    t_program_pulse: {ref: "devices.pcm.program_pulse"}
+    t_verify: {ref: "devices.pcm.verify_read_time"}
+    parallel_writes: {value: 32, unit: "", label: published, source: "Le Gallo 2023: 32 source lines programmed in parallel per core"}
+
+  rram:
+    label_text: "RRAM (NeuRRAM-like devices, HERMES-style readout)"
+    device: rram
+    g_max: {ref: "devices.rram.g_max"}
+    read_voltage: {ref: "chips.hermes.read_voltage"}
+    devices_per_weight: {ref: "devices.rram.devices_per_weight"}
+    device_pitch: {value: 300, unit: "nm", label: assumed, source: "project assumption: 1T1R at a modern node; NeuRRAM is 1.69 um2 per cell at 130 nm (devices.yaml)", range: [100, 1300]}
+    stacked: false  # 1T1R
+    program_iterations: {ref: "devices.rram.pulses_per_cell"}
+    t_program_pulse: {value: 6.57, unit: "us", label: estimated, source: "Wan 2022: 56 us per cell / 8.52 pulses (authors' estimate)"}
+    parallel_writes: {value: 1, unit: "", label: assumed, source: "project assumption (per-cell write-verify)", range: [1, 256]}

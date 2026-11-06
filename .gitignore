@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+# build outputs
+*.log
+neurosim/build/
+results/adapters/
+# local environment
+.env
+.env.*

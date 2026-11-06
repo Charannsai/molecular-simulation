@@ -1,0 +1,332 @@
+{
+  "experiment": "E10",
+  "title": "Break-even map: what a CIM card must reach to beat digital on Llama-3.1-8B",
+  "label": "estimated",
+  "context_tokens": 4096,
+  "criteria": "thresholds proposed for this study",
+  "limits": {
+    "gpu_mJ_tok_measured": 1051.941607927989,
+    "energy_limit_mJ": 105.1941607927989,
+    "rtx4090_tok_s": 135.9724830485309
+  },
+  "ir_drop_limit": 0.1,
+  "axes": {
+    "rows": [
+      128,
+      256,
+      512,
+      1024
+    ],
+    "adc_share": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "periph_area": [
+      5438,
+      2500,
+      1000,
+      500
+    ],
+    "output_bits": [
+      8,
+      10,
+      12
+    ],
+    "weight_bits": [
+      4,
+      8
+    ],
+    "pitch_nm": [
+      50,
+      100,
+      300,
+      1100
+    ],
+    "g_max_uS": [
+      10,
+      50
+    ]
+  },
+  "nominal": {
+    "rows": 256,
+    "adc_share": 1,
+    "periph_area": 5438,
+    "output_bits": 12,
+    "weight_bits": 8,
+    "pitch_nm": 100,
+    "g_max_uS": 10
+  },
+  "designs": 4800,
+  "passing": 3000,
+  "fail_counts": {
+    "ok_energy": 0,
+    "ok_speed": 0,
+    "ok_ir": 1800
+  },
+  "budgets": {
+    "4": {
+      "1": null,
+      "4": {
+        "device": "molecular",
+        "weight_bits": 4,
+        "g_max_uS": 10.0,
+        "pitch_nm": 300.0,
+        "rows": 512,
+        "adc_share": 4,
+        "periph_area": 500,
+        "output_bits": 12,
+        "slices": 1,
+        "reticles": 3.4166750582750582,
+        "area_mm2": 2931.5072,
+        "mJ_tok": 27.354877497369,
+        "tok_s": 251.97920624901795,
+        "ir_drop": 0.0376832
+      },
+      "16": {
+        "device": "molecular",
+        "weight_bits": 4,
+        "g_max_uS": 10.0,
+        "pitch_nm": 300.0,
+        "rows": 512,
+        "adc_share": 8,
+        "periph_area": 2500,
+        "output_bits": 12,
+        "slices": 1,
+        "reticles": 12.812531468531468,
+        "area_mm2": 10993.152,
+        "mJ_tok": 27.357715497368996,
+        "tok_s": 251.79914040631706,
+        "ir_drop": 0.0376832
+      },
+      "64": {
+        "device": "molecular",
+        "weight_bits": 4,
+        "g_max_uS": 10.0,
+        "pitch_nm": 1100.0,
+        "rows": 512,
+        "adc_share": 2,
+        "periph_area": 5438,
+        "output_bits": 12,
+        "slices": 1,
+        "reticles": 55.7396369006993,
+        "area_mm2": 47824.6084608,
+        "mJ_tok": 27.353458497368997,
+        "tok_s": 252.06933578101953,
+        "ir_drop": 0.0376832
+      }
+    },
+    "8": {
+      "1": null,
+      "4": null,
+      "16": {
+        "device": "molecular",
+        "weight_bits": 8,
+        "g_max_uS": 50.0,
+        "pitch_nm": 300.0,
+        "rows": 256,
+        "adc_share": 4,
+        "periph_area": 1000,
+        "output_bits": 12,
+        "slices": 1,
+        "reticles": 13.666700233100233,
+        "area_mm2": 11726.0288,
+        "mJ_tok": 28.233279005188518,
+        "tok_s": 251.97920624901795,
+        "ir_drop": 0.047104
+      },
+      "64": {
+        "device": "molecular",
+        "weight_bits": 8,
+        "g_max_uS": 50.0,
+        "pitch_nm": 1100.0,
+        "rows": 256,
+        "adc_share": 8,
+        "periph_area": 5438,
+        "output_bits": 12,
+        "slices": 1,
+        "reticles": 55.7396369006993,
+        "area_mm2": 47824.6084608,
+        "mJ_tok": 28.236117005188518,
+        "tok_s": 251.79914040631706,
+        "ir_drop": 0.047104
+      }
+    }
+  },
+  "least_aggressive_by_device": {
+    "molecular": {
+      "4": {
+        "device": "molecular",
+        "weight_bits": 4,
+        "g_max_uS": 10.0,
+        "pitch_nm": 1100.0,
+        "rows": 128,
+        "adc_share": 1,
+        "periph_area": 5438,
+        "output_bits": 12,
+        "slices": 1,
+        "reticles": 371.59757933799546,
+        "area_mm2": 318830.7230720001,
+        "mJ_tok": 29.821541162648995,
+        "tok_s": 252.15952981230504,
+        "ir_drop": 0.0023552
+      },
+      "8": {
+        "device": "molecular",
+        "weight_bits": 8,
+        "g_max_uS": 10.0,
+        "pitch_nm": 1100.0,
+        "rows": 128,
+        "adc_share": 1,
+        "periph_area": 5438,
+        "output_bits": 12,
+        "slices": 2,
+        "reticles": 743.1951586759909,
+        "area_mm2": 637661.4461440002,
+        "mJ_tok": 33.12801862120388,
+        "tok_s": 252.15952981230504,
+        "ir_drop": 0.0023552
+      }
+    },
+    "pcm": {
+      "4": {
+        "device": "pcm",
+        "weight_bits": 4,
+        "g_max_uS": NaN,
+        "pitch_nm": NaN,
+        "rows": 128,
+        "adc_share": 1,
+        "periph_area": 5438,
+        "output_bits": 12,
+        "slices": 2,
+        "reticles": 749.4927741434034,
+        "area_mm2": 643064.8002150401,
+        "mJ_tok": 33.44561576604611,
+        "tok_s": 252.15952981230504,
+        "ir_drop": 0.0047104
+      },
+      "8": {
+        "device": "pcm",
+        "weight_bits": 8,
+        "g_max_uS": NaN,
+        "pitch_nm": NaN,
+        "rows": 128,
+        "adc_share": 1,
+        "periph_area": 5438,
+        "output_bits": 12,
+        "slices": 3,
+        "reticles": 1124.239161215105,
+        "area_mm2": 964597.2003225602,
+        "mJ_tok": 36.91089179702212,
+        "tok_s": 252.15952981230504,
+        "ir_drop": 0.0047104
+      }
+    },
+    "rram": {
+      "4": {
+        "device": "rram",
+        "weight_bits": 4,
+        "g_max_uS": NaN,
+        "pitch_nm": NaN,
+        "rows": 128,
+        "adc_share": 1,
+        "periph_area": 5438,
+        "output_bits": 12,
+        "slices": 1,
+        "reticles": 373.1719832048486,
+        "area_mm2": 320181.56158976007,
+        "mJ_tok": 30.15294687900612,
+        "tok_s": 252.15952981230504,
+        "ir_drop": 0.0094208
+      },
+      "8": {
+        "device": "rram",
+        "weight_bits": 8,
+        "g_max_uS": NaN,
+        "pitch_nm": NaN,
+        "rows": 128,
+        "adc_share": 1,
+        "periph_area": 5438,
+        "output_bits": 12,
+        "slices": 2,
+        "reticles": 746.3439664096971,
+        "area_mm2": 640363.1231795201,
+        "mJ_tok": 33.790830053918114,
+        "tok_s": 252.15952981230504,
+        "ir_drop": 0.0094208
+      }
+    }
+  },
+  "min_reticles": {
+    "molecular": {
+      "4": 2.1354219114219113,
+      "8": 4.270843822843823
+    },
+    "pcm": {
+      "4": 10.56845929025641,
+      "8": 15.852688935384615
+    },
+    "rram": {
+      "4": 5.84524768969697,
+      "8": 11.69049537939394
+    }
+  },
+  "tornado": [
+    {
+      "lever": "nominal (E4 card, 8-bit weights)",
+      "reticles": 371.59757933799546,
+      "passes": true
+    },
+    {
+      "lever": "rows = 512",
+      "reticles": 185.79878966899773,
+      "passes": true,
+      "factor": 2.0
+    },
+    {
+      "lever": "adc_share = 16",
+      "reticles": 92.89939483449886,
+      "passes": true,
+      "factor": 4.0
+    },
+    {
+      "lever": "periph_area = 500",
+      "reticles": 34.16675058275058,
+      "passes": true,
+      "factor": 10.876000000000005
+    },
+    {
+      "lever": "pitch_nm = 50",
+      "reticles": 371.59757933799546,
+      "passes": true,
+      "factor": 1.0
+    },
+    {
+      "lever": "output_bits = 8",
+      "reticles": 371.59757933799546,
+      "passes": true,
+      "factor": 1.0
+    },
+    {
+      "lever": "g_max_uS = 50",
+      "reticles": 185.79878966899773,
+      "passes": true,
+      "factor": 2.0
+    }
+  ],
+  "context": {
+    "date": "2026-10-29T12:38:21+00:00",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5050 Laptop GPU",
+      "driver": "592.82",
+      "memory_total": "8151 MiB",
+      "max_memory_clock": "12001 MHz",
+      "max_graphics_clock": "3090 MHz"
+    },
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "on_mains_power": false
+  }
+}

@@ -1,0 +1,467 @@
+{
+  "experiment": "E9",
+  "title": "Scaling 8B, 32B and 70B on the CIM card",
+  "label": "estimated",
+  "context_tokens": 4096,
+  "designs": {
+    "nominal, 8-bit weights": {
+      "rows": 256,
+      "adc_share": 1,
+      "periph_area": 5438,
+      "pitch_nm": 100,
+      "g_max_uS": 10,
+      "output_bits": 12,
+      "weight_bits": 8
+    },
+    "aggressive, 8-bit weights": {
+      "rows": 256,
+      "adc_share": 4,
+      "periph_area": 1000,
+      "pitch_nm": 300.0,
+      "g_max_uS": 50.0,
+      "output_bits": 12,
+      "weight_bits": 8
+    },
+    "nominal, 4-bit weights": {
+      "rows": 256,
+      "adc_share": 1,
+      "periph_area": 5438,
+      "pitch_nm": 100,
+      "g_max_uS": 10,
+      "output_bits": 12,
+      "weight_bits": 4
+    },
+    "aggressive, 4-bit weights": {
+      "rows": 512,
+      "adc_share": 4,
+      "periph_area": 500,
+      "pitch_nm": 300.0,
+      "g_max_uS": 10.0,
+      "output_bits": 12,
+      "weight_bits": 4
+    }
+  },
+  "context": {
+    "date": "2026-10-29T13:02:41+00:00",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5050 Laptop GPU",
+      "driver": "592.82",
+      "memory_total": "8151 MiB",
+      "max_memory_clock": "12001 MHz",
+      "max_graphics_clock": "3090 MHz"
+    },
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "on_mains_power": true
+  },
+  "rows": [
+    {
+      "model": "llama-3.1-8b",
+      "params_B": 8.030261248,
+      "design": "nominal, 8-bit weights",
+      "rows": 256,
+      "adc_share": 1,
+      "periph_area": 5438,
+      "pitch_nm": 100,
+      "g_max_uS": 10,
+      "output_bits": 12,
+      "weight_bits": 8,
+      "tiles": 229024,
+      "area_mm2": 318830.7230720001,
+      "reticles": 371.59757933799546,
+      "array_area_share": 0.0009415226186097828,
+      "mJ_tok": 29.835349734163877,
+      "tok_s": 252.15952981230504,
+      "mvm_ns": 128.0,
+      "ir_drop": 0.0094208,
+      "periphery_mJ": 2.8376989696000003,
+      "array_mJ": 0.0240149069824,
+      "kv_mJ": 21.47483648,
+      "install_s": 2.4014906982400004,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 135.9724830485309,
+          "fits": true
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 34.5326941075634,
+          "fits": true
+        }
+      }
+    },
+    {
+      "model": "llama-3.1-8b",
+      "params_B": 8.030261248,
+      "design": "aggressive, 8-bit weights",
+      "rows": 256,
+      "adc_share": 4,
+      "periph_area": 1000,
+      "pitch_nm": 300.0,
+      "g_max_uS": 50.0,
+      "output_bits": 12,
+      "weight_bits": 8,
+      "tiles": 114512,
+      "area_mm2": 11726.0288,
+      "reticles": 13.666700233100233,
+      "array_area_share": 0.11520000000000001,
+      "mJ_tok": 28.233279005188518,
+      "tok_s": 251.97920624901795,
+      "mvm_ns": 148.0,
+      "ir_drop": 0.047104,
+      "periphery_mJ": 1.4188494848,
+      "array_mJ": 0.06003726745600003,
+      "kv_mJ": 21.47483648,
+      "install_s": 1.2007453491200002,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 135.9724830485309,
+          "fits": true
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 34.5326941075634,
+          "fits": true
+        }
+      }
+    },
+    {
+      "model": "llama-3.1-8b",
+      "params_B": 8.030261248,
+      "design": "nominal, 4-bit weights",
+      "rows": 256,
+      "adc_share": 1,
+      "periph_area": 5438,
+      "pitch_nm": 100,
+      "g_max_uS": 10,
+      "output_bits": 12,
+      "weight_bits": 4,
+      "tiles": 114512,
+      "area_mm2": 159415.36153600004,
+      "reticles": 185.79878966899773,
+      "array_area_share": 0.0009415226186097828,
+      "mJ_tok": 28.175206719128997,
+      "tok_s": 252.15952981230504,
+      "mvm_ns": 128.0,
+      "ir_drop": 0.0094208,
+      "periphery_mJ": 1.4188494848000002,
+      "array_mJ": 0.0120074534912,
+      "kv_mJ": 21.47483648,
+      "install_s": 1.2007453491200002,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 135.9724830485309,
+          "fits": true
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 34.5326941075634,
+          "fits": true
+        }
+      }
+    },
+    {
+      "model": "llama-3.1-8b",
+      "params_B": 8.030261248,
+      "design": "aggressive, 4-bit weights",
+      "rows": 512,
+      "adc_share": 4,
+      "periph_area": 500,
+      "pitch_nm": 300.0,
+      "g_max_uS": 10.0,
+      "output_bits": 12,
+      "weight_bits": 4,
+      "tiles": 57256,
+      "area_mm2": 2931.5072,
+      "reticles": 3.4166750582750582,
+      "array_area_share": 0.46080000000000004,
+      "mJ_tok": 27.354877497369,
+      "tok_s": 251.97920624901795,
+      "mvm_ns": 148.0,
+      "ir_drop": 0.0376832,
+      "periphery_mJ": 0.7094247424000001,
+      "array_mJ": 0.0120074534912,
+      "kv_mJ": 21.47483648,
+      "install_s": 1.2007453491200002,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 135.9724830485309,
+          "fits": true
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 34.5326941075634,
+          "fits": true
+        }
+      }
+    },
+    {
+      "model": "qwen2.5-32b",
+      "params_B": 32.7634176,
+      "design": "nominal, 8-bit weights",
+      "rows": 256,
+      "adc_share": 1,
+      "periph_area": 5438,
+      "pitch_nm": 100,
+      "g_max_uS": 10,
+      "output_bits": 12,
+      "weight_bits": 8,
+      "tiles": 976080,
+      "area_mm2": 1358828.2982400001,
+      "reticles": 1583.7159653146855,
+      "array_area_share": 0.0009415226186097831,
+      "mJ_tok": 67.71560374052743,
+      "tok_s": 126.08200311776764,
+      "mvm_ns": 128.0,
+      "ir_drop": 0.0094208,
+      "periphery_mJ": 12.094021632,
+      "array_mJ": 0.10234940620800001,
+      "kv_mJ": 42.94967296,
+      "install_s": 10.2349406208,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 33.77861158008022,
+          "fits": true
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 8.578695004464818,
+          "fits": true
+        }
+      }
+    },
+    {
+      "model": "qwen2.5-32b",
+      "params_B": 32.7634176,
+      "design": "aggressive, 8-bit weights",
+      "rows": 256,
+      "adc_share": 4,
+      "periph_area": 1000,
+      "pitch_nm": 300.0,
+      "g_max_uS": 50.0,
+      "output_bits": 12,
+      "weight_bits": 8,
+      "tiles": 488040,
+      "area_mm2": 49975.296,
+      "reticles": 58.246265734265734,
+      "array_area_share": 0.1152,
+      "mJ_tok": 60.88127890783623,
+      "tok_s": 125.99218736379412,
+      "mvm_ns": 148.0,
+      "ir_drop": 0.047104,
+      "periphery_mJ": 6.0470108159999985,
+      "array_mJ": 0.2558735155200001,
+      "kv_mJ": 42.94967296,
+      "install_s": 5.1174703104,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 33.77861158008022,
+          "fits": true
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 8.578695004464818,
+          "fits": true
+        }
+      }
+    },
+    {
+      "model": "qwen2.5-32b",
+      "params_B": 32.7634176,
+      "design": "nominal, 4-bit weights",
+      "rows": 256,
+      "adc_share": 1,
+      "periph_area": 5438,
+      "pitch_nm": 100,
+      "g_max_uS": 10,
+      "output_bits": 12,
+      "weight_bits": 4,
+      "tiles": 488040,
+      "area_mm2": 679414.1491200001,
+      "reticles": 791.8579826573427,
+      "array_area_share": 0.0009415226186097831,
+      "mJ_tok": 60.640221273557835,
+      "tok_s": 126.08200311776764,
+      "mvm_ns": 128.0,
+      "ir_drop": 0.0094208,
+      "periphery_mJ": 6.047010816,
+      "array_mJ": 0.051174703104000005,
+      "kv_mJ": 42.94967296,
+      "install_s": 5.1174703104,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 33.77861158008022,
+          "fits": true
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 8.578695004464818,
+          "fits": true
+        }
+      }
+    },
+    {
+      "model": "qwen2.5-32b",
+      "params_B": 32.7634176,
+      "design": "aggressive, 4-bit weights",
+      "rows": 512,
+      "adc_share": 4,
+      "periph_area": 500,
+      "pitch_nm": 300.0,
+      "g_max_uS": 10.0,
+      "output_bits": 12,
+      "weight_bits": 4,
+      "tiles": 244020,
+      "area_mm2": 12493.824,
+      "reticles": 14.561566433566433,
+      "array_area_share": 0.4608,
+      "mJ_tok": 57.13760949435784,
+      "tok_s": 125.99218736379412,
+      "mvm_ns": 148.0,
+      "ir_drop": 0.0376832,
+      "periphery_mJ": 3.023505408,
+      "array_mJ": 0.051174703104000005,
+      "kv_mJ": 42.94967296,
+      "install_s": 5.1174703104,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 33.77861158008022,
+          "fits": true
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 8.578695004464818,
+          "fits": true
+        }
+      }
+    },
+    {
+      "model": "llama-3.1-70b",
+      "params_B": 70.553706496,
+      "design": "nominal, 8-bit weights",
+      "rows": 256,
+      "adc_share": 1,
+      "periph_area": 5438,
+      "pitch_nm": 100,
+      "g_max_uS": 10,
+      "output_bits": 12,
+      "weight_bits": 8,
+      "tiles": 2121024,
+      "area_mm2": 2952736.8990720008,
+      "reticles": 3441.4182972867143,
+      "array_area_share": 0.000941522618609783,
+      "mJ_tok": 101.12376091774976,
+      "tok_s": 88.34896685029153,
+      "mvm_ns": 128.0,
+      "ir_drop": 0.0094208,
+      "periphery_mJ": 26.2803357696,
+      "array_mJ": 0.22240548618240003,
+      "kv_mJ": 53.6870912,
+      "install_s": 22.240548618240002,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 15.895373359554757,
+          "fits": false
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 4.0369202182996204,
+          "fits": true
+        }
+      }
+    },
+    {
+      "model": "llama-3.1-70b",
+      "params_B": 70.553706496,
+      "design": "aggressive, 8-bit weights",
+      "rows": 256,
+      "adc_share": 4,
+      "periph_area": 1000,
+      "pitch_nm": 300.0,
+      "g_max_uS": 50.0,
+      "output_bits": 12,
+      "weight_bits": 8,
+      "tiles": 1060512,
+      "area_mm2": 108596.42880000001,
+      "reticles": 126.56926433566434,
+      "array_area_share": 0.1152,
+      "mJ_tok": 85.9960427058944,
+      "tok_s": 90.46235150085747,
+      "mvm_ns": 148.0,
+      "ir_drop": 0.047104,
+      "periphery_mJ": 13.140167884799997,
+      "array_mJ": 0.5560137154560003,
+      "kv_mJ": 53.6870912,
+      "install_s": 11.120274309120001,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 15.895373359554757,
+          "fits": false
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 4.0369202182996204,
+          "fits": true
+        }
+      }
+    },
+    {
+      "model": "llama-3.1-70b",
+      "params_B": 70.553706496,
+      "design": "nominal, 4-bit weights",
+      "rows": 256,
+      "adc_share": 1,
+      "periph_area": 5438,
+      "pitch_nm": 100,
+      "g_max_uS": 10,
+      "output_bits": 12,
+      "weight_bits": 4,
+      "tiles": 1060512,
+      "area_mm2": 1476368.4495360004,
+      "reticles": 1720.7091486433571,
+      "array_area_share": 0.000941522618609783,
+      "mJ_tok": 85.47744808767487,
+      "tok_s": 90.52017987660335,
+      "mvm_ns": 128.0,
+      "ir_drop": 0.0094208,
+      "periphery_mJ": 13.1401678848,
+      "array_mJ": 0.11120274309120001,
+      "kv_mJ": 53.6870912,
+      "install_s": 11.120274309120001,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 15.895373359554757,
+          "fits": false
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 4.0369202182996204,
+          "fits": true
+        }
+      }
+    },
+    {
+      "model": "llama-3.1-70b",
+      "params_B": 70.553706496,
+      "design": "aggressive, 4-bit weights",
+      "rows": 512,
+      "adc_share": 4,
+      "periph_area": 500,
+      "pitch_nm": 300.0,
+      "g_max_uS": 10.0,
+      "output_bits": 12,
+      "weight_bits": 4,
+      "tiles": 530256,
+      "area_mm2": 27149.107200000002,
+      "reticles": 31.642316083916086,
+      "array_area_share": 0.4608,
+      "mJ_tok": 77.72529524991488,
+      "tok_s": 91.58702741121333,
+      "mvm_ns": 148.0,
+      "ir_drop": 0.0376832,
+      "periphery_mJ": 6.5700839424,
+      "array_mJ": 0.11120274309120001,
+      "kv_mJ": 53.6870912,
+      "install_s": 11.120274309120001,
+      "digital": {
+        "RTX 4090": {
+          "tok_s": 15.895373359554757,
+          "fits": false
+        },
+        "Ryzen AI Max+ 395": {
+          "tok_s": 4.0369202182996204,
+          "fits": true
+        }
+      }
+    }
+  ]
+}

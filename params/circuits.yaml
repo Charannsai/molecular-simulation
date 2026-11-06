@@ -1,0 +1,59 @@
+# Peripheral circuits and interconnect: converters, memory and links (29 Oct 2026).
+
+link:
+  pcie5_x16_bandwidth:
+    {value: 63, unit: "GB/s", label: published, source: "PCI-SIG PCIe 5.0 x16, one direction after encoding (dossier)", note: "theoretical, not sustained"}
+  pcie5_energy_per_bit:
+    {value: 11.4, unit: "pJ/bit", label: published, source: "Intel, 32 Gb/s NRZ SerDes for PCIe Gen 5, CICC 2020 (abstract)", note: "10 nm, includes PLL and clocking (verify on IEEE Xplore)"}
+
+fab:
+  reticle_area:
+    {value: 858, unit: "mm**2", label: published, source: "standard lithography field 26 x 33 mm (ASML scanners)", note: "largest single die a fab can print without stitching"}
+
+memory:
+  lpddr5x_8533_x128_bandwidth:
+    {value: 136, unit: "GB/s", label: estimated, source: "8533 MT/s x 128-bit bus / 8", note: "theoretical peak for one 128-bit LPDDR5X package group"}
+  lpddr5x_energy_per_bit:
+    {value: 5, unit: "pJ/bit", label: assumed, source: "project assumption: no open primary source found", note: "between HBM2 (about 4) and GDDR5 (about 14); replace when a JEDEC or ISSCC figure is found", range: [2, 10]}
+  hbm2_energy_per_bit:
+    {value: 3.97, unit: "pJ/bit", label: published, source: "O'Connor et al., Fine-Grained DRAM, MICRO 2017", note: "from a search summary (verify location)"}
+  gddr5_energy_per_bit:
+    {value: 14, unit: "pJ/bit", label: published, source: "O'Connor et al., MICRO 2017, Fig. 1a", note: "(verify)"}
+  lpddr5x_8533_x256_bandwidth:
+    {value: 273, unit: "GB/s", label: estimated, source: "8533 MT/s x 256-bit bus / 8 (as the Ryzen AI Max+ 395's 256-bit interface)", note: "theoretical peak, two 128-bit groups"}
+  hbm3_stack_bandwidth:
+    {value: 819, unit: "GB/s", label: estimated, source: "JEDEC HBM3: 6.4 Gb/s per pin x 1,024-bit interface / 8", note: "one stack, theoretical peak (verify)"}
+  hbm3_energy_per_bit:
+    {value: 4, unit: "pJ/bit", label: assumed, source: "taken equal to HBM2 (3.97 pJ/bit, O'Connor et al. MICRO 2017)", note: "no open HBM3 figure found; HBM3 is likely similar or lower", range: [2.5, 5]}
+  kv_sram_energy_per_bit:
+    {value: 0.3, unit: "pJ/bit", label: assumed, source: "anchored on Horowitz ISSCC 2014: 10 pJ per 64-bit read of an 8 KB SRAM at 45 nm (0.16 pJ/bit); a multi-MB buffer costs more in wires", range: [0.1, 1.0]}
+  kv_sram_bandwidth:
+    {value: 2000, unit: "GB/s", label: assumed, source: "project assumption: banked on-chip SRAM next to the digital core", range: [1000, 8000]}
+  sram_area_per_bit:
+    {value: 0.05, unit: "um**2", label: assumed, source: "about 0.021 um2 high-density bitcell at a 5 nm-class node (verify) plus periphery, about 2x", range: [0.03, 0.08]}
+  sram_access_45nm:
+    {value: 10, unit: "pJ", label: published, source: "Horowitz, ISSCC 2014, Section 5", note: "internal cache access at 45 nm; modern nodes are lower"}
+
+# ADC energy per conversion versus resolution: the lowest-energy SAR entries in each resolution band of the
+# Murmann ADC Performance Survey 1997 to 2026 (rows with at least 10 MS/s). Bits are approximate (from SNDR).
+adc_survey:
+  - {bits: 5.5, node_nm: 40, rate: "900 MS/s",
+     energy: {value: 0.78, unit: "pJ", label: published, source: "Murmann survey; ISSCC 2021, DOI 10.1109/ISSCC42613.2021.9365927"},
+     area: {value: 0.045, unit: "mm**2", label: published, source: "Murmann survey; ISSCC 2021"}}
+  - {bits: 7, node_nm: 28, rate: "4.8 GS/s",
+     energy: {value: 1.60, unit: "pJ", label: published, source: "Murmann survey; ISSCC 2024, DOI 10.1109/ISSCC49657.2024.10454299"},
+     area: {value: 0.015, unit: "mm**2", label: published, source: "Murmann survey; ISSCC 2024"}}
+  - {bits: 9.5, node_nm: 22, rate: "10 MS/s",
+     energy: {value: 1.46, unit: "pJ", label: published, source: "Murmann survey; VLSI 2025, DOI 10.23919/VLSITechnologyandCir65189.2025.11074903"},
+     area: {value: 0.014, unit: "mm**2", label: published, source: "Murmann survey; VLSI 2025"}}
+  - {bits: 11.5, node_nm: 22, rate: "200 MS/s",
+     energy: {value: 10.0, unit: "pJ", label: published, source: "Murmann survey; ISSCC 2024, DOI 10.1109/ISSCC49657.2024.10454412"},
+     area: {value: 0.019, unit: "mm**2", label: published, source: "Murmann survey; ISSCC 2024"}}
+
+adc:
+  best_walden_fom:
+    {value: 0.354, unit: "fJ", label: published, source: "Murmann survey; VLSI 2019, DOI 10.23919/VLSIC.2019.8778093", note: "per conversion step; low-speed design, a lower bound"}
+  cim_neuron_energy_10bit:
+    {value: 15, unit: "fJ/op", label: published, source: "Wan 2022 (NeuRRAM), Extended Data Fig. 12a", note: "output stage about 1 fJ/op at 1 bit to about 15 at 10 bit, read from plot (verify)", range: [1, 15]}
+  cim_neuron_area_130nm:
+    {value: 1270, unit: "um**2", label: published, source: "Wan 2022, Extended Data Fig. 11e"}

@@ -1,0 +1,104 @@
+{
+  "experiment": "E5",
+  "title": "Context-length sweep on Llama-3.1-8B: the KV-cache bottleneck",
+  "label": "estimated",
+  "context": {
+    "date": "2026-10-29T10:11:34+00:00",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5050 Laptop GPU",
+      "driver": "592.82",
+      "memory_total": "8151 MiB",
+      "max_memory_clock": "12001 MHz",
+      "max_graphics_clock": "3090 MHz"
+    },
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "on_mains_power": false
+  },
+  "rows": [
+    {
+      "context": 512,
+      "cim_fp16": {
+        "tok_s": 1954.611079305884,
+        "mJ_tok": 4.9910679972466445,
+        "kv_energy_share": 0.537831694835823,
+        "kv_latency_share": 0.9644980080443512
+      },
+      "cim_int8": {
+        "tok_s": 3180.568345681063,
+        "mJ_tok": 3.45168920383488,
+        "kv_energy_share": 0.3888465040562807,
+        "kv_latency_share": 0.7847217961507921
+      },
+      "gpu_fp16": {
+        "tok_s": 54.53458631192718,
+        "kv_GB": 0.067108864,
+        "fits_in_vram": true
+      },
+      "offload_fraction_gpu_attention": 0.9824302623289232
+    },
+    {
+      "context": 4096,
+      "cim_fp16": {
+        "tok_s": 252.15952981230504,
+        "mJ_tok": 28.175206719128997,
+        "kv_energy_share": 0.7621891365013512,
+        "kv_latency_share": 0.9954199760281132
+      },
+      "cim_int8": {
+        "tok_s": 455.9012617946398,
+        "mJ_tok": 15.66550245183488,
+        "kv_energy_share": 0.6854180562042771,
+        "kv_latency_share": 0.8998534051530845
+      },
+      "gpu_fp16": {
+        "tok_s": 49.54632244417203,
+        "kv_GB": 0.536870912,
+        "fits_in_vram": true
+      },
+      "offload_fraction_gpu_attention": 0.8748358122441691
+    },
+    {
+      "context": 32768,
+      "cim_fp16": {
+        "tok_s": 31.6467663063143,
+        "mJ_tok": 213.6483164941878,
+        "kv_energy_share": 0.8041190993642756,
+        "kv_latency_share": 0.9994251934542252
+      },
+      "cim_int8": {
+        "tok_s": 58.05231147473766,
+        "mJ_tok": 113.37600843583486,
+        "kv_energy_share": 0.7576501157968948,
+        "kv_latency_share": 0.9166646295632491
+      },
+      "gpu_fp16": {
+        "tok_s": 28.610421950868613,
+        "kv_GB": 4.294967296,
+        "fits_in_vram": false
+      },
+      "offload_fraction_gpu_attention": 0.4662932771823956
+    },
+    {
+      "context": 131072,
+      "cim_fp16": {
+        "tok_s": 7.915103816691816,
+        "mJ_tok": 849.5561214372466,
+        "kv_energy_share": 0.8088868410452157,
+        "kv_latency_share": 0.9998562363863567
+      },
+      "cim_int8": {
+        "tok_s": 14.542186414646823,
+        "mJ_tok": 448.38345752383486,
+        "kv_energy_share": 0.766302542866973,
+        "kv_latency_share": 0.9185031626947587
+      },
+      "gpu_fp16": {
+        "tok_s": 11.683684730297504,
+        "kv_GB": 17.179869184,
+        "fits_in_vram": false
+      },
+      "offload_fraction_gpu_attention": 0.1792663341116432
+    }
+  ]
+}

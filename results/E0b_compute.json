@@ -1,0 +1,26 @@
+{
+  "experiment": "E0b",
+  "title": "GPU FP16 matrix-multiply throughput on the author's PC",
+  "label": "measured",
+  "method": "PyTorch 2.11.0+cu128, 8192x8192 FP16 matmul, 30 timed reps after 5 warm-ups, median reported",
+  "context": {
+    "date": "2026-10-29T08:44:30+00:00",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5050 Laptop GPU",
+      "driver": "592.82",
+      "memory_total": "8151 MiB",
+      "max_memory_clock": "12001 MHz",
+      "max_graphics_clock": "3090 MHz"
+    },
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "on_mains_power": true
+  },
+  "fp16_TFLOPS": {
+    "median": 24.64269404300761,
+    "min": 18.12029464389935,
+    "max": 24.81041026616748,
+    "spread_pct": 27.148474962162098,
+    "n": 30
+  }
+}

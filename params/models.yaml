@@ -1,0 +1,111 @@
+# LLM shapes for the simulator. Values are copied from each model's published config.json
+# on Hugging Face (verify the exact revision when citing). reported_params is the size the
+# model card states; llm.py must reproduce it from the shapes.
+
+llama-3.2-3b:
+  source: "Hugging Face meta-llama/Llama-3.2-3B config.json"
+  label: published
+  kind: dense
+  hidden_size: 3072
+  intermediate_size: 8192
+  num_layers: 28
+  num_heads: 24
+  num_kv_heads: 8
+  head_dim: 128
+  vocab_size: 128256
+  tied_embeddings: true
+  reported_params: {value: 3.21e9, unit: "", label: published, source: "Meta Llama 3.2 model card"}
+
+llama-3.1-8b:
+  source: "Hugging Face meta-llama/Llama-3.1-8B config.json"
+  label: published
+  kind: dense
+  hidden_size: 4096
+  intermediate_size: 14336
+  num_layers: 32
+  num_heads: 32
+  num_kv_heads: 8
+  head_dim: 128
+  vocab_size: 128256
+  tied_embeddings: false
+  reported_params: {value: 8.03e9, unit: "", label: published, source: "Meta Llama 3.1 model card"}
+
+qwen2.5-1.5b-instruct:
+  source: "Hugging Face Qwen/Qwen2.5-1.5B-Instruct config.json (fetched 29 Oct 2026)"
+  label: published
+  kind: dense
+  hidden_size: 1536
+  intermediate_size: 8960
+  num_layers: 28
+  num_heads: 12
+  num_kv_heads: 2
+  head_dim: 128
+  vocab_size: 151936
+  tied_embeddings: true
+  reported_params: {value: 1.54e9, unit: "", label: published, source: "Qwen2.5 model card"}
+
+qwen2.5-32b:
+  source: "Hugging Face Qwen/Qwen2.5-32B config.json"
+  label: published
+  kind: dense
+  hidden_size: 5120
+  intermediate_size: 27648
+  num_layers: 64
+  num_heads: 40
+  num_kv_heads: 8
+  head_dim: 128
+  vocab_size: 152064
+  tied_embeddings: false
+  reported_params: {value: 32.5e9, unit: "", label: published, source: "Qwen2.5 model card"}
+
+llama-3.1-70b:
+  source: "Hugging Face meta-llama/Llama-3.1-70B config.json"
+  label: published
+  kind: dense
+  hidden_size: 8192
+  intermediate_size: 28672
+  num_layers: 80
+  num_heads: 64
+  num_kv_heads: 8
+  head_dim: 128
+  vocab_size: 128256
+  tied_embeddings: false
+  reported_params: {value: 70.6e9, unit: "", label: published, source: "Meta Llama 3.1 model card"}
+
+
+# Mixture-of-experts models (experiment E6). Shapes from each model's config.json
+# (verify the revision); tests check they reproduce the reported total and active parameters.
+
+qwen3-30b-a3b:
+  source: "Hugging Face Qwen/Qwen3-30B-A3B config.json (verify)"
+  label: published
+  kind: moe
+  hidden_size: 2048
+  num_layers: 48
+  num_heads: 32
+  num_kv_heads: 4
+  head_dim: 128
+  vocab_size: 151936
+  tied_embeddings: false
+  num_experts: 128
+  experts_per_token: 8
+  moe_intermediate_size: 768
+  reported_params: {value: 30.5e9, unit: "", label: published, source: "Qwen3 model card"}
+  reported_active_params: {value: 3.3e9, unit: "", label: published, source: "Qwen3 model card"}
+
+gpt-oss-120b:
+  source: "Hugging Face openai/gpt-oss-120b config.json (verify)"
+  label: published
+  kind: moe
+  hidden_size: 2880
+  num_layers: 36
+  num_heads: 64
+  num_kv_heads: 8
+  head_dim: 64
+  vocab_size: 201088
+  tied_embeddings: false
+  num_experts: 128
+  experts_per_token: 4
+  moe_intermediate_size: 2880
+  reported_params: {value: 116.8e9, unit: "", label: published, source: "OpenAI gpt-oss model card (117B)"}
+  reported_active_params: {value: 5.1e9, unit: "", label: published, source: "OpenAI gpt-oss model card"}

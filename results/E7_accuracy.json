@@ -1,0 +1,1690 @@
+{
+  "experiment": "E7",
+  "title": "GPT-2 small on simulated analog hardware: devices, time and tolerances",
+  "label": "estimated (simulated perplexity)",
+  "model": "GPT-2 small (124M), fine-tuned on WikiText-2 train; output head digital",
+  "test_tokens": 65536,
+  "baseline_ppl_digital_ft": 22.77682287896699,
+  "baseline_ppl_hwa_digital": 23.329825459345994,
+  "training": {
+    "digital": {
+      "steps": 1500,
+      "tokens_seen": 6144000,
+      "seconds": 1508.614003419876,
+      "hwa_out_noise": null,
+      "hwa_weight_noise": null
+    },
+    "hwa": {
+      "steps": 1500,
+      "tokens_seen": 6144000,
+      "seconds": 4172.539126634598,
+      "hwa_out_noise": 0.02,
+      "hwa_weight_noise": 0.03
+    }
+  },
+  "validation": {
+    "check": "FastAnalogLinear vs AIHWKit 1.2.0 on GPT-2 small",
+    "windows": 16,
+    "tokens": 8192,
+    "digital_ppl": 41.971094429976624,
+    "cases": [
+      {
+        "case": "converters only (8-bit in, 12-bit out)",
+        "fast": {
+          "ppl": 42.2422371527098,
+          "runs": [
+            42.2422371527098
+          ],
+          "seconds": 2.8377294540405273
+        },
+        "aihwkit": {
+          "ppl": 42.6876676497763,
+          "runs": [
+            42.6876676497763
+          ],
+          "seconds": 6.520398378372192
+        },
+        "difference_pct": -1.0434641234582376
+      },
+      {
+        "case": "readout noise 0.02",
+        "fast": {
+          "ppl": 43.382195217024176,
+          "runs": [
+            43.26309705975967,
+            43.50129337428867
+          ],
+          "seconds": 5.754955768585205
+        },
+        "aihwkit": {
+          "ppl": 42.9962739795198,
+          "runs": [
+            43.0852509292925,
+            42.9072970297471
+          ],
+          "seconds": 14.430771589279175
+        },
+        "difference_pct": 0.8975690258374414
+      },
+      {
+        "case": "PCM (PCMLikeNoiseModel), 1 day, no readout noise",
+        "fast": {
+          "ppl": 53.76587011152067,
+          "runs": [
+            54.06008386744186,
+            53.47165635559947
+          ],
+          "seconds": 5.187626600265503
+        },
+        "aihwkit": {
+          "ppl": 53.71054729937164,
+          "runs": [
+            52.93608993949166,
+            54.48500465925162
+          ],
+          "seconds": 32.86262035369873
+        },
+        "difference_pct": 0.10300176581830023,
+        "aihwkit_per_tile_scaling": {
+          "ppl": 3473.8340726722017
+        }
+      }
+    ],
+    "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU"
+  },
+  "tolerances": {
+    "digital": {
+      "programming_noise_share_of_gmax": {
+        "2%": 0.01,
+        "5%": 0.02,
+        "10%": 0.02
+      },
+      "readout_noise": {
+        "2%": 0.01,
+        "5%": 0.02,
+        "10%": 0.02
+      },
+      "levels_per_device": {
+        "2%": 32.0,
+        "5%": 16.0,
+        "10%": 16.0
+      },
+      "molecular_window_uS_for_levels": {
+        "2%": 11.25,
+        "5%": 5.65,
+        "10%": 5.65
+      },
+      "weight_bits_equivalent": {
+        "2%": 6.0,
+        "5%": 5.0,
+        "10%": 5.0
+      }
+    },
+    "hwa": {
+      "programming_noise_share_of_gmax": {
+        "2%": null,
+        "5%": 0.01,
+        "10%": 0.03
+      },
+      "readout_noise": {
+        "2%": null,
+        "5%": 0.02,
+        "10%": 0.04
+      },
+      "levels_per_device": {
+        "2%": null,
+        "5%": 16.0,
+        "10%": 16.0
+      },
+      "molecular_window_uS_for_levels": {
+        "2%": null,
+        "5%": 5.65,
+        "10%": 5.65
+      },
+      "weight_bits_equivalent": {
+        "2%": null,
+        "5%": 5.0,
+        "10%": 5.0
+      }
+    }
+  },
+  "nominal_readout_noise": 0.02,
+  "devices": [
+    {
+      "model": "digital",
+      "name": "Molecular 10 uS (28 levels)",
+      "1 day": NaN,
+      "1 h": NaN,
+      "1 s": 3.5235022777063696,
+      "1 year": 3.5235022777063696
+    },
+    {
+      "model": "digital",
+      "name": "Molecular 50 uS (142 levels)",
+      "1 day": NaN,
+      "1 h": NaN,
+      "1 s": 2.425445302364193,
+      "1 year": 2.425445302364193
+    },
+    {
+      "model": "digital",
+      "name": "Molecular 6000 uS (16520 levels)",
+      "1 day": NaN,
+      "1 h": NaN,
+      "1 s": 2.3764515791256047,
+      "1 year": 2.3764515791256047
+    },
+    {
+      "model": "digital",
+      "name": "PCM (HermesNoiseModel)",
+      "1 day": 66.15322569675683,
+      "1 h": 24.553587713974757,
+      "1 s": 16.932671076128635,
+      "1 year": 1780.4715943677952
+    },
+    {
+      "model": "digital",
+      "name": "PCM (PCMLikeNoiseModel)",
+      "1 day": 21.31164127259315,
+      "1 h": 16.01368445343283,
+      "1 s": 12.248723018433028,
+      "1 year": 40.92726043521488
+    },
+    {
+      "model": "digital",
+      "name": "RRAM (ReRamWan2022NoiseModel)",
+      "1 day": 1206.6660210493292,
+      "1 h": NaN,
+      "1 s": 72.92466947396372,
+      "1 year": NaN
+    },
+    {
+      "model": "hwa",
+      "name": "Molecular 10 uS (28 levels)",
+      "1 day": NaN,
+      "1 h": NaN,
+      "1 s": 4.600646374610018,
+      "1 year": 4.600646374610018
+    },
+    {
+      "model": "hwa",
+      "name": "Molecular 50 uS (142 levels)",
+      "1 day": NaN,
+      "1 h": NaN,
+      "1 s": 3.8789353915003266,
+      "1 year": 3.8789353915003266
+    },
+    {
+      "model": "hwa",
+      "name": "Molecular 6000 uS (16520 levels)",
+      "1 day": NaN,
+      "1 h": NaN,
+      "1 s": 3.8369032276549087,
+      "1 year": 3.8369032276549087
+    },
+    {
+      "model": "hwa",
+      "name": "PCM (HermesNoiseModel)",
+      "1 day": 28.374951349782673,
+      "1 h": 15.769727814035516,
+      "1 s": 12.937971591938213,
+      "1 year": 284.6104810984364
+    },
+    {
+      "model": "hwa",
+      "name": "PCM (PCMLikeNoiseModel)",
+      "1 day": 14.780223916816748,
+      "1 h": 12.087340975325356,
+      "1 s": 10.070459606108573,
+      "1 year": 24.0543475242037
+    },
+    {
+      "model": "hwa",
+      "name": "RRAM (ReRamWan2022NoiseModel)",
+      "1 day": 328.09546984831394,
+      "1 h": NaN,
+      "1 s": 39.01502003082198,
+      "1 year": NaN
+    }
+  ],
+  "runs": [
+    {
+      "key": "digital|digital|digital (no analog)|None|None",
+      "model": "digital",
+      "group": "digital",
+      "name": "digital (no analog)",
+      "t": NaN,
+      "out_noise": NaN,
+      "runs": [
+        22.77682287896699
+      ],
+      "ppl_mean": 22.77682287896699,
+      "ppl_min": 22.77682287896699,
+      "ppl_max": 22.77682287896699,
+      "windows": 128,
+      "seconds": 6.190836668014526,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 0.0
+    },
+    {
+      "key": "digital|readout|readout noise 0|None|0.0",
+      "model": "digital",
+      "group": "readout",
+      "name": "readout noise 0",
+      "t": NaN,
+      "out_noise": 0.0,
+      "runs": [
+        22.88752809612908
+      ],
+      "ppl_mean": 22.88752809612908,
+      "ppl_min": 22.88752809612908,
+      "ppl_max": 22.88752809612908,
+      "windows": 128,
+      "seconds": 14.808784008026123,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 0.48604328070849245
+    },
+    {
+      "key": "digital|readout|readout noise 0.01|None|0.01",
+      "model": "digital",
+      "group": "readout",
+      "name": "readout noise 0.01",
+      "t": NaN,
+      "out_noise": 0.01,
+      "runs": [
+        23.003890650878784,
+        22.99649626003457,
+        23.009603524091716
+      ],
+      "ppl_mean": 23.003330145001687,
+      "ppl_min": 22.99649626003457,
+      "ppl_max": 23.009603524091716,
+      "windows": 128,
+      "seconds": 48.6828887462616,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 0.9944638338644785
+    },
+    {
+      "key": "digital|readout|readout noise 0.02|None|0.02",
+      "model": "digital",
+      "group": "readout",
+      "name": "readout noise 0.02",
+      "t": NaN,
+      "out_noise": 0.02,
+      "runs": [
+        23.297218289599474,
+        23.28356102686339,
+        23.33163848015888
+      ],
+      "ppl_mean": 23.30413926554058,
+      "ppl_min": 23.28356102686339,
+      "ppl_max": 23.33163848015888,
+      "windows": 128,
+      "seconds": 50.299665451049805,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 2.315144607198638
+    },
+    {
+      "key": "digital|readout|readout noise 0.04|None|0.04",
+      "model": "digital",
+      "group": "readout",
+      "name": "readout noise 0.04",
+      "t": NaN,
+      "out_noise": 0.04,
+      "runs": [
+        25.91393780275912,
+        26.014953110499953,
+        26.089737094471506
+      ],
+      "ppl_mean": 26.00620933591019,
+      "ppl_min": 25.91393780275912,
+      "ppl_max": 26.089737094471506,
+      "windows": 128,
+      "seconds": 47.34874963760376,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 14.178388593105051
+    },
+    {
+      "key": "digital|readout|readout noise 0.06|None|0.06",
+      "model": "digital",
+      "group": "readout",
+      "name": "readout noise 0.06",
+      "t": NaN,
+      "out_noise": 0.06,
+      "runs": [
+        37.72799366287456,
+        38.20283473340545,
+        38.32114150034395
+      ],
+      "ppl_mean": 38.08398996554132,
+      "ppl_min": 37.72799366287456,
+      "ppl_max": 38.32114150034395,
+      "windows": 128,
+      "seconds": 47.47691631317139,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 67.2050143600562
+    },
+    {
+      "key": "digital|device|PCM (PCMLikeNoiseModel)|1 s|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "PCM (PCMLikeNoiseModel)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        25.526204771186016,
+        25.495433895204833,
+        25.67843981104137
+      ],
+      "ppl_mean": 25.566692825810737,
+      "ppl_min": 25.495433895204833,
+      "ppl_max": 25.67843981104137,
+      "windows": 128,
+      "seconds": 45.86981511116028,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 12.248723018433028
+    },
+    {
+      "key": "digital|device|PCM (PCMLikeNoiseModel)|1 h|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "PCM (PCMLikeNoiseModel)",
+      "t": "1 h",
+      "out_noise": 0.02,
+      "runs": [
+        26.44226972710851,
+        26.417113246349885,
+        26.41331129650777
+      ],
+      "ppl_mean": 26.424231423322055,
+      "ppl_min": 26.41331129650777,
+      "ppl_max": 26.44226972710851,
+      "windows": 128,
+      "seconds": 46.69721794128418,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 16.01368445343283
+    },
+    {
+      "key": "digital|device|PCM (PCMLikeNoiseModel)|1 day|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "PCM (PCMLikeNoiseModel)",
+      "t": "1 day",
+      "out_noise": 0.02,
+      "runs": [
+        27.70258809749823,
+        27.649621973127374,
+        27.54060292205346
+      ],
+      "ppl_mean": 27.630937664226355,
+      "ppl_min": 27.54060292205346,
+      "ppl_max": 27.70258809749823,
+      "windows": 128,
+      "seconds": 47.070789098739624,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 21.31164127259315
+    },
+    {
+      "key": "digital|device|PCM (PCMLikeNoiseModel)|1 year|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "PCM (PCMLikeNoiseModel)",
+      "t": "1 year",
+      "out_noise": 0.02,
+      "runs": [
+        32.14236632500561,
+        32.19873979543351,
+        31.955151372089123
+      ],
+      "ppl_mean": 32.098752497509416,
+      "ppl_min": 31.955151372089123,
+      "ppl_max": 32.19873979543351,
+      "windows": 128,
+      "seconds": 45.6445426940918,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 40.92726043521488
+    },
+    {
+      "key": "digital|device|PCM (HermesNoiseModel)|1 s|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "PCM (HermesNoiseModel)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        26.55097112505801,
+        26.541633282543472,
+        26.808037728363168
+      ],
+      "ppl_mean": 26.63354737865488,
+      "ppl_min": 26.541633282543472,
+      "ppl_max": 26.808037728363168,
+      "windows": 128,
+      "seconds": 46.53738451004028,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 16.932671076128635
+    },
+    {
+      "key": "digital|device|PCM (HermesNoiseModel)|1 h|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "PCM (HermesNoiseModel)",
+      "t": "1 h",
+      "out_noise": 0.02,
+      "runs": [
+        28.535201702312065,
+        28.359555904084814,
+        28.21329258263557
+      ],
+      "ppl_mean": 28.369350063010817,
+      "ppl_min": 28.21329258263557,
+      "ppl_max": 28.535201702312065,
+      "windows": 128,
+      "seconds": 46.24824810028076,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 24.553587713974757
+    },
+    {
+      "key": "digital|device|PCM (HermesNoiseModel)|1 day|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "PCM (HermesNoiseModel)",
+      "t": "1 day",
+      "out_noise": 0.02,
+      "runs": [
+        38.936715708165394,
+        38.21046879187768,
+        36.38609327387862
+      ],
+      "ppl_mean": 37.84442592464057,
+      "ppl_min": 36.38609327387862,
+      "ppl_max": 38.936715708165394,
+      "windows": 128,
+      "seconds": 46.193384885787964,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 66.15322569675683
+    },
+    {
+      "key": "digital|device|PCM (HermesNoiseModel)|1 year|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "PCM (HermesNoiseModel)",
+      "t": "1 year",
+      "out_noise": 0.02,
+      "runs": [
+        440.1012484574812,
+        433.25103395491846,
+        411.5827706029182
+      ],
+      "ppl_mean": 428.3116843384393,
+      "ppl_min": 411.5827706029182,
+      "ppl_max": 440.1012484574812,
+      "windows": 128,
+      "seconds": 46.21276092529297,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 1780.4715943677952
+    },
+    {
+      "key": "digital|device|RRAM (ReRamWan2022NoiseModel)|1 s|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "RRAM (ReRamWan2022NoiseModel)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        38.57637623559512,
+        38.25112081407992,
+        41.33273999069642
+      ],
+      "ppl_mean": 39.386745680123816,
+      "ppl_min": 38.25112081407992,
+      "ppl_max": 41.33273999069642,
+      "windows": 128,
+      "seconds": 45.13036894798279,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 72.92466947396372
+    },
+    {
+      "key": "digital|device|RRAM (ReRamWan2022NoiseModel)|1 day|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "RRAM (ReRamWan2022NoiseModel)",
+      "t": "1 day",
+      "out_noise": 0.02,
+      "runs": [
+        257.8636348120386,
+        292.93002459606714,
+        342.0573562940479
+      ],
+      "ppl_mean": 297.6170052340512,
+      "ppl_min": 257.8636348120386,
+      "ppl_max": 342.0573562940479,
+      "windows": 128,
+      "seconds": 43.90872025489807,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 1206.6660210493292
+    },
+    {
+      "key": "digital|device|Molecular 10 uS (28 levels)|1 s|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "Molecular 10 uS (28 levels)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        23.605934546840164,
+        23.55283666060526,
+        23.579323048244188
+      ],
+      "ppl_mean": 23.579364751896538,
+      "ppl_min": 23.55283666060526,
+      "ppl_max": 23.605934546840164,
+      "windows": 128,
+      "seconds": 45.09261345863342,
+      "prog_rel": 0.004200000000000001,
+      "levels": 28.0,
+      "loss_pct": 3.5235022777063696
+    },
+    {
+      "key": "digital|device|Molecular 10 uS (28 levels)|1 year|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "Molecular 10 uS (28 levels)",
+      "t": "1 year",
+      "out_noise": 0.02,
+      "runs": [
+        23.605934546840164,
+        23.55283666060526,
+        23.579323048244188
+      ],
+      "ppl_mean": 23.579364751896538,
+      "ppl_min": 23.55283666060526,
+      "ppl_max": 23.605934546840164,
+      "windows": 128,
+      "seconds": 44.941673278808594,
+      "prog_rel": 0.004200000000000001,
+      "levels": 28.0,
+      "loss_pct": 3.5235022777063696
+    },
+    {
+      "key": "digital|device|Molecular 50 uS (142 levels)|1 s|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "Molecular 50 uS (142 levels)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        23.343170016576043,
+        23.308107980792627,
+        23.33650878116946
+      ],
+      "ppl_mean": 23.329262259512706,
+      "ppl_min": 23.308107980792627,
+      "ppl_max": 23.343170016576043,
+      "windows": 128,
+      "seconds": 46.57724213600159,
+      "prog_rel": 0.00084,
+      "levels": 142.0,
+      "loss_pct": 2.425445302364193
+    },
+    {
+      "key": "digital|device|Molecular 50 uS (142 levels)|1 year|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "Molecular 50 uS (142 levels)",
+      "t": "1 year",
+      "out_noise": 0.02,
+      "runs": [
+        23.343170016576043,
+        23.308107980792627,
+        23.33650878116946
+      ],
+      "ppl_mean": 23.329262259512706,
+      "ppl_min": 23.308107980792627,
+      "ppl_max": 23.343170016576043,
+      "windows": 128,
+      "seconds": 45.22894644737244,
+      "prog_rel": 0.00084,
+      "levels": 142.0,
+      "loss_pct": 2.425445302364193
+    },
+    {
+      "key": "digital|device|Molecular 6000 uS (16520 levels)|1 s|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "Molecular 6000 uS (16520 levels)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        23.340404154071123,
+        23.30760090221232,
+        23.30630408156308
+      ],
+      "ppl_mean": 23.318103045948842,
+      "ppl_min": 23.30630408156308,
+      "ppl_max": 23.340404154071123,
+      "windows": 128,
+      "seconds": 45.13811135292053,
+      "prog_rel": 7.000000000000001e-06,
+      "levels": 16520.0,
+      "loss_pct": 2.3764515791256047
+    },
+    {
+      "key": "digital|device|Molecular 6000 uS (16520 levels)|1 year|0.02",
+      "model": "digital",
+      "group": "device",
+      "name": "Molecular 6000 uS (16520 levels)",
+      "t": "1 year",
+      "out_noise": 0.02,
+      "runs": [
+        23.340404154071123,
+        23.30760090221232,
+        23.30630408156308
+      ],
+      "ppl_mean": 23.318103045948842,
+      "ppl_min": 23.30630408156308,
+      "ppl_max": 23.340404154071123,
+      "windows": 128,
+      "seconds": 45.09725069999695,
+      "prog_rel": 7.000000000000001e-06,
+      "levels": 16520.0,
+      "loss_pct": 2.3764515791256047
+    },
+    {
+      "key": "digital|prog_noise|programming noise 0.25%|1 s|0.0",
+      "model": "digital",
+      "group": "prog_noise",
+      "name": "programming noise 0.25%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        22.912703632969908,
+        22.89306060778926,
+        22.890213687248526
+      ],
+      "ppl_mean": 22.898659309335898,
+      "ppl_min": 22.890213687248526,
+      "ppl_max": 22.912703632969908,
+      "windows": 128,
+      "seconds": 40.42470049858093,
+      "prog_rel": 0.0025,
+      "levels": NaN,
+      "loss_pct": 0.5349140703966082
+    },
+    {
+      "key": "digital|prog_noise|programming noise 0.5%|1 s|0.0",
+      "model": "digital",
+      "group": "prog_noise",
+      "name": "programming noise 0.5%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        22.931124131775384,
+        22.930567508616942,
+        22.919659875515322
+      ],
+      "ppl_mean": 22.927117171969215,
+      "ppl_min": 22.919659875515322,
+      "ppl_max": 22.931124131775384,
+      "windows": 128,
+      "seconds": 39.3864803314209,
+      "prog_rel": 0.005,
+      "levels": NaN,
+      "loss_pct": 0.6598562661740415
+    },
+    {
+      "key": "digital|prog_noise|programming noise 1%|1 s|0.0",
+      "model": "digital",
+      "group": "prog_noise",
+      "name": "programming noise 1%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.11094933888098,
+        23.09227255374536,
+        23.053313229711545
+      ],
+      "ppl_mean": 23.08551170744596,
+      "ppl_min": 23.053313229711545,
+      "ppl_max": 23.11094933888098,
+      "windows": 128,
+      "seconds": 41.588868141174316,
+      "prog_rel": 0.01,
+      "levels": NaN,
+      "loss_pct": 1.355276063388211
+    },
+    {
+      "key": "digital|prog_noise|programming noise 2%|1 s|0.0",
+      "model": "digital",
+      "group": "prog_noise",
+      "name": "programming noise 2%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.85827011423228,
+        23.889078734972205,
+        23.80243564724711
+      ],
+      "ppl_mean": 23.849928165483863,
+      "ppl_min": 23.80243564724711,
+      "ppl_max": 23.889078734972205,
+      "windows": 128,
+      "seconds": 39.30074334144592,
+      "prog_rel": 0.02,
+      "levels": NaN,
+      "loss_pct": 4.711391453580749
+    },
+    {
+      "key": "digital|prog_noise|programming noise 3%|1 s|0.0",
+      "model": "digital",
+      "group": "prog_noise",
+      "name": "programming noise 3%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        25.490914487864508,
+        25.48377441658319,
+        25.420015823458215
+      ],
+      "ppl_mean": 25.46490157596864,
+      "ppl_min": 25.420015823458215,
+      "ppl_max": 25.490914487864508,
+      "windows": 128,
+      "seconds": 38.56321167945862,
+      "prog_rel": 0.03,
+      "levels": NaN,
+      "loss_pct": 11.801815869077714
+    },
+    {
+      "key": "digital|prog_noise|programming noise 5%|1 s|0.0",
+      "model": "digital",
+      "group": "prog_noise",
+      "name": "programming noise 5%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        36.57621173621922,
+        36.684073999122006,
+        35.89621317882135
+      ],
+      "ppl_mean": 36.38549963805419,
+      "ppl_min": 35.89621317882135,
+      "ppl_max": 36.684073999122006,
+      "windows": 128,
+      "seconds": 39.11694359779358,
+      "prog_rel": 0.05,
+      "levels": NaN,
+      "loss_pct": 59.74791493704765
+    },
+    {
+      "key": "digital|prog_noise|programming noise 10%|1 s|0.0",
+      "model": "digital",
+      "group": "prog_noise",
+      "name": "programming noise 10%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        1138.248367317364,
+        4170.755626515575,
+        986.181282060656
+      ],
+      "ppl_mean": 2098.3950919645317,
+      "ppl_min": 986.181282060656,
+      "ppl_max": 4170.755626515575,
+      "windows": 128,
+      "seconds": 38.80299186706543,
+      "prog_rel": 0.1,
+      "levels": NaN,
+      "loss_pct": 9112.852482170689
+    },
+    {
+      "key": "digital|levels|8 levels|1 s|0.0",
+      "model": "digital",
+      "group": "levels",
+      "name": "8 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        26.037225551575137
+      ],
+      "ppl_mean": 26.037225551575137,
+      "ppl_min": 26.037225551575137,
+      "ppl_max": 26.037225551575137,
+      "windows": 128,
+      "seconds": 12.795964241027832,
+      "prog_rel": NaN,
+      "levels": 8.0,
+      "loss_pct": 14.314563053563244
+    },
+    {
+      "key": "digital|levels|16 levels|1 s|0.0",
+      "model": "digital",
+      "group": "levels",
+      "name": "16 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.481346490702336
+      ],
+      "ppl_mean": 23.481346490702336,
+      "ppl_min": 23.481346490702336,
+      "ppl_max": 23.481346490702336,
+      "windows": 128,
+      "seconds": 13.867726802825928,
+      "prog_rel": NaN,
+      "levels": 16.0,
+      "loss_pct": 3.0931601632022687
+    },
+    {
+      "key": "digital|levels|32 levels|1 s|0.0",
+      "model": "digital",
+      "group": "levels",
+      "name": "32 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.02207707887095
+      ],
+      "ppl_mean": 23.02207707887095,
+      "ppl_min": 23.02207707887095,
+      "ppl_max": 23.02207707887095,
+      "windows": 128,
+      "seconds": 12.820168018341064,
+      "prog_rel": NaN,
+      "levels": 32.0,
+      "loss_pct": 1.076770896481971
+    },
+    {
+      "key": "digital|levels|64 levels|1 s|0.0",
+      "model": "digital",
+      "group": "levels",
+      "name": "64 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        22.904647398601217
+      ],
+      "ppl_mean": 22.904647398601217,
+      "ppl_min": 22.904647398601217,
+      "ppl_max": 22.904647398601217,
+      "windows": 128,
+      "seconds": 12.924261569976807,
+      "prog_rel": NaN,
+      "levels": 64.0,
+      "loss_pct": 0.561204344931987
+    },
+    {
+      "key": "digital|levels|128 levels|1 s|0.0",
+      "model": "digital",
+      "group": "levels",
+      "name": "128 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        22.895607649837675
+      ],
+      "ppl_mean": 22.895607649837675,
+      "ppl_min": 22.895607649837675,
+      "ppl_max": 22.895607649837675,
+      "windows": 128,
+      "seconds": 12.759727716445923,
+      "prog_rel": NaN,
+      "levels": 128.0,
+      "loss_pct": 0.5215159792122614
+    },
+    {
+      "key": "digital|levels|256 levels|1 s|0.0",
+      "model": "digital",
+      "group": "levels",
+      "name": "256 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        22.89792841354511
+      ],
+      "ppl_mean": 22.89792841354511,
+      "ppl_min": 22.89792841354511,
+      "ppl_max": 22.89792841354511,
+      "windows": 128,
+      "seconds": 12.905564308166504,
+      "prog_rel": NaN,
+      "levels": 256.0,
+      "loss_pct": 0.5317051250811389
+    },
+    {
+      "key": "hwa|digital|digital (no analog)|None|None",
+      "model": "hwa",
+      "group": "digital",
+      "name": "digital (no analog)",
+      "t": NaN,
+      "out_noise": NaN,
+      "runs": [
+        23.329825459345994
+      ],
+      "ppl_mean": 23.329825459345994,
+      "ppl_min": 23.329825459345994,
+      "ppl_max": 23.329825459345994,
+      "windows": 128,
+      "seconds": 5.997981071472168,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 2.427917990659134
+    },
+    {
+      "key": "hwa|readout|readout noise 0|None|0.0",
+      "model": "hwa",
+      "group": "readout",
+      "name": "readout noise 0",
+      "t": NaN,
+      "out_noise": 0.0,
+      "runs": [
+        23.39687738254749
+      ],
+      "ppl_mean": 23.39687738254749,
+      "ppl_min": 23.39687738254749,
+      "ppl_max": 23.39687738254749,
+      "windows": 128,
+      "seconds": 13.990730285644531,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 2.7223046290318464
+    },
+    {
+      "key": "hwa|readout|readout noise 0.01|None|0.01",
+      "model": "hwa",
+      "group": "readout",
+      "name": "readout noise 0.01",
+      "t": NaN,
+      "out_noise": 0.01,
+      "runs": [
+        23.45580584345464,
+        23.464899986563502,
+        23.49040573184041
+      ],
+      "ppl_mean": 23.470370520619515,
+      "ppl_min": 23.45580584345464,
+      "ppl_max": 23.49040573184041,
+      "windows": 128,
+      "seconds": 45.81419134140015,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 3.0449709572662798
+    },
+    {
+      "key": "hwa|readout|readout noise 0.02|None|0.02",
+      "model": "hwa",
+      "group": "readout",
+      "name": "readout noise 0.02",
+      "t": NaN,
+      "out_noise": 0.02,
+      "runs": [
+        23.659581898725587,
+        23.644389532167338,
+        23.669217432295735
+      ],
+      "ppl_mean": 23.657729621062884,
+      "ppl_min": 23.644389532167338,
+      "ppl_max": 23.669217432295735,
+      "windows": 128,
+      "seconds": 45.686601400375366,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 3.8675575903492687
+    },
+    {
+      "key": "hwa|readout|readout noise 0.04|None|0.04",
+      "model": "hwa",
+      "group": "readout",
+      "name": "readout noise 0.04",
+      "t": NaN,
+      "out_noise": 0.04,
+      "runs": [
+        24.454840131299814,
+        24.470357430662688,
+        24.540607621617145
+      ],
+      "ppl_mean": 24.488601727859884,
+      "ppl_min": 24.454840131299814,
+      "ppl_max": 24.540607621617145,
+      "windows": 128,
+      "seconds": 45.490336418151855,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 7.515441718930949
+    },
+    {
+      "key": "hwa|readout|readout noise 0.06|None|0.06",
+      "model": "hwa",
+      "group": "readout",
+      "name": "readout noise 0.06",
+      "t": NaN,
+      "out_noise": 0.06,
+      "runs": [
+        26.62470038251876,
+        26.70194819883111,
+        26.817801376096167
+      ],
+      "ppl_mean": 26.714816652482014,
+      "ppl_min": 26.62470038251876,
+      "ppl_max": 26.817801376096167,
+      "windows": 128,
+      "seconds": 45.631142139434814,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 17.289477968200394
+    },
+    {
+      "key": "hwa|device|PCM (PCMLikeNoiseModel)|1 s|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "PCM (PCMLikeNoiseModel)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        25.06324851623577,
+        25.00273527118339,
+        25.14567709222561
+      ],
+      "ppl_mean": 25.070553626548257,
+      "ppl_min": 25.00273527118339,
+      "ppl_max": 25.14567709222561,
+      "windows": 128,
+      "seconds": 44.06589984893799,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 10.070459606108573
+    },
+    {
+      "key": "hwa|device|PCM (PCMLikeNoiseModel)|1 h|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "PCM (PCMLikeNoiseModel)",
+      "t": "1 h",
+      "out_noise": 0.02,
+      "runs": [
+        25.5479647435993,
+        25.495183154801502,
+        25.546657472680128
+      ],
+      "ppl_mean": 25.529935123693644,
+      "ppl_min": 25.495183154801502,
+      "ppl_max": 25.5479647435993,
+      "windows": 128,
+      "seconds": 43.51023888587952,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 12.087340975325356
+    },
+    {
+      "key": "hwa|device|PCM (PCMLikeNoiseModel)|1 day|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "PCM (PCMLikeNoiseModel)",
+      "t": "1 day",
+      "out_noise": 0.02,
+      "runs": [
+        26.189630349250717,
+        26.143297273454944,
+        26.096937282139518
+      ],
+      "ppl_mean": 26.14328830161506,
+      "ppl_min": 26.096937282139518,
+      "ppl_max": 26.189630349250717,
+      "windows": 128,
+      "seconds": 43.92451524734497,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 14.780223916816748
+    },
+    {
+      "key": "hwa|device|PCM (PCMLikeNoiseModel)|1 year|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "PCM (PCMLikeNoiseModel)",
+      "t": "1 year",
+      "out_noise": 0.02,
+      "runs": [
+        28.32081226741977,
+        28.321574011108556,
+        28.124530749209818
+      ],
+      "ppl_mean": 28.25563900924605,
+      "ppl_min": 28.124530749209818,
+      "ppl_max": 28.321574011108556,
+      "windows": 128,
+      "seconds": 44.04636549949646,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 24.0543475242037
+    },
+    {
+      "key": "hwa|device|PCM (HermesNoiseModel)|1 s|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "PCM (HermesNoiseModel)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        25.703166333641235,
+        25.62875754824067,
+        25.839121375899563
+      ],
+      "ppl_mean": 25.723681752593823,
+      "ppl_min": 25.62875754824067,
+      "ppl_max": 25.839121375899563,
+      "windows": 128,
+      "seconds": 44.53345704078674,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 12.937971591938213
+    },
+    {
+      "key": "hwa|device|PCM (HermesNoiseModel)|1 h|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "PCM (HermesNoiseModel)",
+      "t": "1 h",
+      "out_noise": 0.02,
+      "runs": [
+        26.420415746226368,
+        26.314859861111458,
+        26.37072194765733
+      ],
+      "ppl_mean": 26.368665851665053,
+      "ppl_min": 26.314859861111458,
+      "ppl_max": 26.420415746226368,
+      "windows": 128,
+      "seconds": 44.61256527900696,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 15.769727814035516
+    },
+    {
+      "key": "hwa|device|PCM (HermesNoiseModel)|1 day|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "PCM (HermesNoiseModel)",
+      "t": "1 day",
+      "out_noise": 0.02,
+      "runs": [
+        29.583916678614948,
+        29.306691170050776,
+        28.8285980210344
+      ],
+      "ppl_mean": 29.23973528990004,
+      "ppl_min": 28.8285980210344,
+      "ppl_max": 29.583916678614948,
+      "windows": 128,
+      "seconds": 44.69808530807495,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 28.374951349782673
+    },
+    {
+      "key": "hwa|device|PCM (HermesNoiseModel)|1 year|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "PCM (HermesNoiseModel)",
+      "t": "1 year",
+      "out_noise": 0.02,
+      "runs": [
+        88.15064876745232,
+        88.3120421121644,
+        86.34345328158429
+      ],
+      "ppl_mean": 87.60204805373367,
+      "ppl_min": 86.34345328158429,
+      "ppl_max": 88.3120421121644,
+      "windows": 128,
+      "seconds": 44.580896854400635,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 284.6104810984364
+    },
+    {
+      "key": "hwa|device|RRAM (ReRamWan2022NoiseModel)|1 s|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "RRAM (ReRamWan2022NoiseModel)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        31.449424805103334,
+        31.38075658261655,
+        32.15943327502253
+      ],
+      "ppl_mean": 31.663204887580804,
+      "ppl_min": 31.38075658261655,
+      "ppl_max": 32.15943327502253,
+      "windows": 128,
+      "seconds": 43.70514464378357,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 39.01502003082198
+    },
+    {
+      "key": "hwa|device|RRAM (ReRamWan2022NoiseModel)|1 day|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "RRAM (ReRamWan2022NoiseModel)",
+      "t": "1 day",
+      "out_noise": 0.02,
+      "runs": [
+        94.30665820868178,
+        96.65731994108977,
+        101.55566261092449
+      ],
+      "ppl_mean": 97.506546920232,
+      "ppl_min": 94.30665820868178,
+      "ppl_max": 101.55566261092449,
+      "windows": 128,
+      "seconds": 43.497395038604736,
+      "prog_rel": NaN,
+      "levels": NaN,
+      "loss_pct": 328.09546984831394
+    },
+    {
+      "key": "hwa|device|Molecular 10 uS (28 levels)|1 s|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "Molecular 10 uS (28 levels)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        23.84283363129792,
+        23.805001214371647,
+        23.826277019329023
+      ],
+      "ppl_mean": 23.82470395499953,
+      "ppl_min": 23.805001214371647,
+      "ppl_max": 23.84283363129792,
+      "windows": 128,
+      "seconds": 43.489914655685425,
+      "prog_rel": 0.004200000000000001,
+      "levels": 28.0,
+      "loss_pct": 4.600646374610018
+    },
+    {
+      "key": "hwa|device|Molecular 10 uS (28 levels)|1 year|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "Molecular 10 uS (28 levels)",
+      "t": "1 year",
+      "out_noise": 0.02,
+      "runs": [
+        23.84283363129792,
+        23.805001214371647,
+        23.826277019329023
+      ],
+      "ppl_mean": 23.82470395499953,
+      "ppl_min": 23.805001214371647,
+      "ppl_max": 23.84283363129792,
+      "windows": 128,
+      "seconds": 43.31606960296631,
+      "prog_rel": 0.004200000000000001,
+      "levels": 28.0,
+      "loss_pct": 4.600646374610018
+    },
+    {
+      "key": "hwa|device|Molecular 50 uS (142 levels)|1 s|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "Molecular 50 uS (142 levels)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        23.66739863434279,
+        23.64931842192225,
+        23.664246311770707
+      ],
+      "ppl_mean": 23.66032112267858,
+      "ppl_min": 23.64931842192225,
+      "ppl_max": 23.66739863434279,
+      "windows": 128,
+      "seconds": 43.79090738296509,
+      "prog_rel": 0.00084,
+      "levels": 142.0,
+      "loss_pct": 3.8789353915003266
+    },
+    {
+      "key": "hwa|device|Molecular 50 uS (142 levels)|1 year|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "Molecular 50 uS (142 levels)",
+      "t": "1 year",
+      "out_noise": 0.02,
+      "runs": [
+        23.66739863434279,
+        23.64931842192225,
+        23.664246311770707
+      ],
+      "ppl_mean": 23.66032112267858,
+      "ppl_min": 23.64931842192225,
+      "ppl_max": 23.66739863434279,
+      "windows": 128,
+      "seconds": 43.81016826629639,
+      "prog_rel": 0.00084,
+      "levels": 142.0,
+      "loss_pct": 3.8789353915003266
+    },
+    {
+      "key": "hwa|device|Molecular 6000 uS (16520 levels)|1 s|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "Molecular 6000 uS (16520 levels)",
+      "t": "1 s",
+      "out_noise": 0.02,
+      "runs": [
+        23.67062721147919,
+        23.634299929982248,
+        23.647315452040512
+      ],
+      "ppl_mean": 23.650747531167315,
+      "ppl_min": 23.634299929982248,
+      "ppl_max": 23.67062721147919,
+      "windows": 128,
+      "seconds": 43.75426173210144,
+      "prog_rel": 7.000000000000001e-06,
+      "levels": 16520.0,
+      "loss_pct": 3.8369032276549087
+    },
+    {
+      "key": "hwa|device|Molecular 6000 uS (16520 levels)|1 year|0.02",
+      "model": "hwa",
+      "group": "device",
+      "name": "Molecular 6000 uS (16520 levels)",
+      "t": "1 year",
+      "out_noise": 0.02,
+      "runs": [
+        23.67062721147919,
+        23.634299929982248,
+        23.647315452040512
+      ],
+      "ppl_mean": 23.650747531167315,
+      "ppl_min": 23.634299929982248,
+      "ppl_max": 23.67062721147919,
+      "windows": 128,
+      "seconds": 43.718202352523804,
+      "prog_rel": 7.000000000000001e-06,
+      "levels": 16520.0,
+      "loss_pct": 3.8369032276549087
+    },
+    {
+      "key": "hwa|prog_noise|programming noise 0.25%|1 s|0.0",
+      "model": "hwa",
+      "group": "prog_noise",
+      "name": "programming noise 0.25%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.409840991182094,
+        23.40916844924937,
+        23.401448856543603
+      ],
+      "ppl_mean": 23.406819432325022,
+      "ppl_min": 23.401448856543603,
+      "ppl_max": 23.409840991182094,
+      "windows": 128,
+      "seconds": 38.985132694244385,
+      "prog_rel": 0.0025,
+      "levels": NaN,
+      "loss_pct": 2.7659544823514404
+    },
+    {
+      "key": "hwa|prog_noise|programming noise 0.5%|1 s|0.0",
+      "model": "hwa",
+      "group": "prog_noise",
+      "name": "programming noise 0.5%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.43878591485014,
+        23.437540119250585,
+        23.41962852282381
+      ],
+      "ppl_mean": 23.431984852308176,
+      "ppl_min": 23.41962852282381,
+      "ppl_max": 23.43878591485014,
+      "windows": 128,
+      "seconds": 38.71113872528076,
+      "prog_rel": 0.005,
+      "levels": NaN,
+      "loss_pct": 2.8764414458620102
+    },
+    {
+      "key": "hwa|prog_noise|programming noise 1%|1 s|0.0",
+      "model": "hwa",
+      "group": "prog_noise",
+      "name": "programming noise 1%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.56015049468001,
+        23.538295773498515,
+        23.54937815826639
+      ],
+      "ppl_mean": 23.54927480881497,
+      "ppl_min": 23.538295773498515,
+      "ppl_max": 23.56015049468001,
+      "windows": 128,
+      "seconds": 38.88322901725769,
+      "prog_rel": 0.01,
+      "levels": NaN,
+      "loss_pct": 3.3913945502965337
+    },
+    {
+      "key": "hwa|prog_noise|programming noise 2%|1 s|0.0",
+      "model": "hwa",
+      "group": "prog_noise",
+      "name": "programming noise 2%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        24.079369382803378,
+        24.048519970646833,
+        24.059916077628387
+      ],
+      "ppl_mean": 24.062601810359535,
+      "ppl_min": 24.048519970646833,
+      "ppl_max": 24.079369382803378,
+      "windows": 128,
+      "seconds": 38.729206562042236,
+      "prog_rel": 0.02,
+      "levels": NaN,
+      "loss_pct": 5.645119770325313
+    },
+    {
+      "key": "hwa|prog_noise|programming noise 3%|1 s|0.0",
+      "model": "hwa",
+      "group": "prog_noise",
+      "name": "programming noise 3%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        25.041937587165194,
+        25.023262974489032,
+        25.018534239160033
+      ],
+      "ppl_mean": 25.02791160027142,
+      "ppl_min": 25.018534239160033,
+      "ppl_max": 25.041937587165194,
+      "windows": 128,
+      "seconds": 41.26803660392761,
+      "prog_rel": 0.03,
+      "levels": NaN,
+      "loss_pct": 9.88324286168627
+    },
+    {
+      "key": "hwa|prog_noise|programming noise 5%|1 s|0.0",
+      "model": "hwa",
+      "group": "prog_noise",
+      "name": "programming noise 5%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        29.34999479374336,
+        29.340050725010723,
+        29.33991213267644
+      ],
+      "ppl_mean": 29.343319217143506,
+      "ppl_min": 29.33991213267644,
+      "ppl_max": 29.34999479374336,
+      "windows": 128,
+      "seconds": 39.19906282424927,
+      "prog_rel": 0.05,
+      "levels": NaN,
+      "loss_pct": 28.82972912012358
+    },
+    {
+      "key": "hwa|prog_noise|programming noise 10%|1 s|0.0",
+      "model": "hwa",
+      "group": "prog_noise",
+      "name": "programming noise 10%",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        249.00195146731141,
+        311.47369486503635,
+        236.29610837487917
+      ],
+      "ppl_mean": 265.590584902409,
+      "ppl_min": 236.29610837487917,
+      "ppl_max": 311.47369486503635,
+      "windows": 128,
+      "seconds": 39.12762641906738,
+      "prog_rel": 0.1,
+      "levels": NaN,
+      "loss_pct": 1066.0563297775202
+    },
+    {
+      "key": "hwa|levels|8 levels|1 s|0.0",
+      "model": "hwa",
+      "group": "levels",
+      "name": "8 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        25.430206119640957
+      ],
+      "ppl_mean": 25.430206119640957,
+      "ppl_min": 25.430206119640957,
+      "ppl_max": 25.430206119640957,
+      "windows": 128,
+      "seconds": 13.1130530834198,
+      "prog_rel": NaN,
+      "levels": 8.0,
+      "loss_pct": 11.649487967543548
+    },
+    {
+      "key": "hwa|levels|16 levels|1 s|0.0",
+      "model": "hwa",
+      "group": "levels",
+      "name": "16 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.739919721907107
+      ],
+      "ppl_mean": 23.739919721907107,
+      "ppl_min": 23.739919721907107,
+      "ppl_max": 23.739919721907107,
+      "windows": 128,
+      "seconds": 13.104560613632202,
+      "prog_rel": NaN,
+      "levels": 16.0,
+      "loss_pct": 4.228407307102877
+    },
+    {
+      "key": "hwa|levels|32 levels|1 s|0.0",
+      "model": "hwa",
+      "group": "levels",
+      "name": "32 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.51157799264486
+      ],
+      "ppl_mean": 23.51157799264486,
+      "ppl_min": 23.51157799264486,
+      "ppl_max": 23.51157799264486,
+      "windows": 128,
+      "seconds": 13.007405996322632,
+      "prog_rel": NaN,
+      "levels": 32.0,
+      "loss_pct": 3.2258893945931844
+    },
+    {
+      "key": "hwa|levels|64 levels|1 s|0.0",
+      "model": "hwa",
+      "group": "levels",
+      "name": "64 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.421965058193898
+      ],
+      "ppl_mean": 23.421965058193898,
+      "ppl_min": 23.421965058193898,
+      "ppl_max": 23.421965058193898,
+      "windows": 128,
+      "seconds": 12.969297885894775,
+      "prog_rel": NaN,
+      "levels": 64.0,
+      "loss_pct": 2.8324502616326575
+    },
+    {
+      "key": "hwa|levels|128 levels|1 s|0.0",
+      "model": "hwa",
+      "group": "levels",
+      "name": "128 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.416450929631054
+      ],
+      "ppl_mean": 23.416450929631054,
+      "ppl_min": 23.416450929631054,
+      "ppl_max": 23.416450929631054,
+      "windows": 128,
+      "seconds": 12.993715524673462,
+      "prog_rel": NaN,
+      "levels": 128.0,
+      "loss_pct": 2.8082408774172007
+    },
+    {
+      "key": "hwa|levels|256 levels|1 s|0.0",
+      "model": "hwa",
+      "group": "levels",
+      "name": "256 levels",
+      "t": "1 s",
+      "out_noise": 0.0,
+      "runs": [
+        23.41515119284918
+      ],
+      "ppl_mean": 23.41515119284918,
+      "ppl_min": 23.41515119284918,
+      "ppl_max": 23.41515119284918,
+      "windows": 128,
+      "seconds": 13.096217393875122,
+      "prog_rel": NaN,
+      "levels": 256.0,
+      "loss_pct": 2.8025344767098614
+    }
+  ]
+}

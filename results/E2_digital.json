@@ -1,0 +1,83 @@
+{
+  "experiment": "E2",
+  "title": "Digital model validation against measured GPU decode",
+  "label": "estimated (predictions) vs measured (targets)",
+  "method": "Roofline: ceiling = min(bandwidth / bytes per token, compute / ops per token); utilisation calibrated on one model, applied to the other",
+  "tolerance_pct": 30.0,
+  "passed": true,
+  "context": {
+    "date": "2026-10-29T08:45:41+00:00",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5050 Laptop GPU",
+      "driver": "592.82",
+      "memory_total": "8151 MiB",
+      "max_memory_clock": "12001 MHz",
+      "max_graphics_clock": "3090 MHz"
+    },
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "on_mains_power": true
+  },
+  "inputs": {
+    "read_bandwidth_GBps": 367.348884042715,
+    "fp16_TFLOPS": 24.64269404300761,
+    "file_bytes": {
+      "llama3.2:3b-instruct-q8_0": 3421914787,
+      "llama3.1:8b-instruct-q4_K_M": 4920753328
+    }
+  },
+  "models": {
+    "llama3.2:3b-instruct-q8_0": {
+      "model": "llama-3.2-3b",
+      "avg_context_tokens": 472,
+      "bytes_per_param": 1.0651046531657984,
+      "weight_GB_per_token": 3.4219147870000004,
+      "kv_GB_per_token": 0.054132736,
+      "memory_ceiling_tok_s": 105.6800523042547,
+      "compute_ceiling_tok_s": 3740.600504387603,
+      "measured_tok_s": 75.5966376033031,
+      "utilisation": 0.7153349752861502,
+      "streamed_GBps": 262.7775048880904,
+      "compute_share": 0.020209759773766454,
+      "dynamic_energy_pJ_per_byte": 189.46637011871744
+    },
+    "llama3.1:8b-instruct-q4_K_M": {
+      "model": "llama-3.1-8b",
+      "avg_context_tokens": 457,
+      "bytes_per_param": 0.6127762442629812,
+      "weight_GB_per_token": 4.598839553984746,
+      "kv_GB_per_token": 0.059899904000000004,
+      "memory_ceiling_tok_s": 78.85156217807057,
+      "compute_ceiling_tok_s": 1615.9727546645468,
+      "measured_tok_s": 52.847205105370314,
+      "utilisation": 0.6702112633612181,
+      "streamed_GBps": 246.20135966860158,
+      "compute_share": 0.032703029771278945,
+      "dynamic_energy_pJ_per_byte": 194.30282234026126
+    }
+  },
+  "cross_validation": [
+    {
+      "target": "llama-3.2-3b",
+      "calibrated_on": "llama-3.1-8b",
+      "utilisation_used": 0.6702112633612181,
+      "predicted_tok_s": 70.82796136691415,
+      "measured_tok_s": 75.5966376033031,
+      "error_pct": -6.308053357363318,
+      "raw_ceiling_tok_s": 105.6800523042547,
+      "raw_ceiling_error_pct": 39.79464650109934,
+      "pass": true
+    },
+    {
+      "target": "llama-3.1-8b",
+      "calibrated_on": "llama-3.2-3b",
+      "utilisation_used": 0.7153349752861502,
+      "predicted_tok_s": 56.40528028192444,
+      "measured_tok_s": 52.847205105370314,
+      "error_pct": 6.73275941359585,
+      "raw_ceiling_tok_s": 78.85156217807057,
+      "raw_ceiling_error_pct": 49.20668372310516,
+      "pass": true
+    }
+  ]
+}

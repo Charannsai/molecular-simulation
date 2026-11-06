@@ -1,0 +1,38 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "mode": "chip",
+  "head": "analog",
+  "seed": 0,
+  "readout_noise": 0.02,
+  "layers_on_chip": 169,
+  "devices": 1099169792,
+  "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU",
+  "date": "2026-11-05T17:55:28+05:30",
+  "tasks": {
+    "arc_easy": {
+      "accuracy": 0.475,
+      "n": 400,
+      "seconds": 136.3981761932373
+    },
+    "arc_challenge": {
+      "accuracy": 0.30666666666666664,
+      "n": 300,
+      "seconds": 103.40805172920227
+    },
+    "hellaswag": {
+      "accuracy": 0.4725,
+      "n": 400,
+      "seconds": 752.3872892856598
+    },
+    "mmlu": {
+      "accuracy": 0.3875,
+      "n": 400,
+      "seconds": 8810.449842214584
+    },
+    "wikitext": {
+      "perplexity": 25.86573237300946,
+      "seconds": 588.5154147148132
+    }
+  },
+  "seconds": 10405.322857379913
+}

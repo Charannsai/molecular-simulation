@@ -1,0 +1,63 @@
+# Published analog compute-in-memory chips used to VALIDATE the CIM model (experiment E3).
+
+hermes:
+  # Le Gallo et al., "A 64-core mixed-signal in-memory compute chip based on phase-change memory for deep
+  # neural network inference", Nature Electronics 6, 680 (2023), DOI 10.1038/s41928-023-01010-1, arXiv:2212.02872.
+  # Primary validation target: Table I gives measured energy and RTL latency in one place.
+  # Consistency check (ours): 64 x 256 x 256 MAC x 2 = 8.39 M op; / 133 ns = 63.1 TOPS; / 9.76 TOPS/W = 0.86 uJ. Matches.
+  process: {value: 14, unit: "nm", label: published, source: "Le Gallo 2023, abstract; Methods"}
+  cores: {value: 64, unit: "", label: published, source: "Le Gallo 2023, Extended Data Table I"}
+  rows: {value: 256, unit: "", label: published, source: "Le Gallo 2023, Section II", note: "256 x 256 unit cells (weights) per core"}
+  cols: {value: 256, unit: "", label: published, source: "Le Gallo 2023, Section II"}
+  devices_per_weight: {value: 4, unit: "", label: published, source: "Le Gallo 2023, Section II"}
+  adc_bits: {value: 12, unit: "", label: published, source: "Le Gallo 2023, Section II", note: "CCO current ADC, one per row, 256 per core, no multiplexing; 2 x 12-bit per polarity"}
+  adcs_per_core: {value: 256, unit: "", label: published, source: "Le Gallo 2023, Extended Data Table I"}
+  input_bits: {value: 8, unit: "", label: published, source: "Le Gallo 2023, Extended Data Table I", note: "pulse-width modulation, 1 ns per LSB"}
+  clock: {value: 1, unit: "GHz", label: published, source: "Le Gallo 2023, Extended Data Table I"}
+  read_voltage: {value: 0.25, unit: "V", label: published, source: "Le Gallo 2023, Extended Data Table I", note: "100 to 400 mV", range: [0.1, 0.4]}
+  chip_area: {value: 144, unit: "mm**2", label: published, source: "Le Gallo 2023, Section II", note: "12 x 12 mm"}
+  core_area: {value: 1.392, unit: "mm**2", label: published, source: "Le Gallo 2023, Extended Data Table I", note: "1.2 x 1.16 mm (verify: scrambled table in the PDF)"}
+  mvm_latency_1phase: {value: 133, unit: "ns", label: published, source: "Le Gallo 2023, Table I", note: "all 64 cores, 8-bit in and out; latency from RTL simulation"}
+  mvm_latency_4phase: {value: 520, unit: "ns", label: published, source: "Le Gallo 2023, Table I", note: "4-phase read used for all accuracy results"}
+  mvm_energy_1phase: {value: 0.86, unit: "uJ", label: published, source: "Le Gallo 2023, Table I", note: "measured; PCM array, ADCs and PWM inputs; excludes digital units"}
+  mvm_energy_4phase: {value: 3.38, unit: "uJ", label: published, source: "Le Gallo 2023, Table I"}
+  peak_throughput_1phase: {value: 63.1, unit: "Top/s", label: published, source: "Le Gallo 2023, abstract; Table I"}
+  peak_efficiency_1phase: {value: 9.76, unit: "Top/s/W", label: published, source: "Le Gallo 2023, abstract; Table I", note: "8-bit MVM; 4-phase: 2.48 TOPS/W"}
+  peak_efficiency_4phase: {value: 2.48, unit: "Top/s/W", label: published, source: "Le Gallo 2023, abstract; Table I"}
+
+neurram:
+  # Wan et al., "A compute-in-memory chip based on resistive random-access memory", Nature 608, 504 (2022).
+  # Second check: how energy and latency scale with input and output precision (Extended Data Table 1).
+  process: {value: 130, unit: "nm", label: published, source: "Wan 2022, Methods"}
+  cores: {value: 48, unit: "", label: published, source: "Wan 2022, main text"}
+  rows: {value: 256, unit: "", label: published, source: "Wan 2022, main text"}
+  cols: {value: 256, unit: "", label: published, source: "Wan 2022, main text"}
+  chip_area: {value: 159, unit: "mm**2", label: published, source: "Wan 2022, Extended Data Table 1"}
+  neuron_area: {value: 1270, unit: "um**2", label: published, source: "Wan 2022, Extended Data Fig. 11e caption"}
+  operating_points:
+    - {input_bits: 1, weight_bits: 4, output_bits: 3,
+       throughput: {value: 2135, unit: "Gop/s", label: published, source: "Wan 2022, Extended Data Table 1"},
+       efficiency: {value: 43, unit: "Top/s/W", label: published, source: "Wan 2022, Extended Data Table 1"},
+       mvm_latency: {value: 1.4, unit: "us", label: published, source: "Wan 2022, Extended Data Table 1", note: "one 256 x 256 MVM"}}
+    - {input_bits: 2, weight_bits: 4, output_bits: 5,
+       throughput: {value: 1804, unit: "Gop/s", label: published, source: "Wan 2022, Extended Data Table 1"},
+       efficiency: {value: 40, unit: "Top/s/W", label: published, source: "Wan 2022, Extended Data Table 1"},
+       mvm_latency: {value: 1.6, unit: "us", label: published, source: "Wan 2022, Extended Data Table 1"}}
+    - {input_bits: 4, weight_bits: 4, output_bits: 6,
+       throughput: {value: 754, unit: "Gop/s", label: published, source: "Wan 2022, Extended Data Table 1"},
+       efficiency: {value: 16, unit: "Top/s/W", label: published, source: "Wan 2022, Extended Data Table 1"},
+       mvm_latency: {value: 3.9, unit: "us", label: published, source: "Wan 2022, Extended Data Table 1"}}
+    - {input_bits: 8, weight_bits: 4, output_bits: 10,
+       throughput: {value: 274, unit: "Gop/s", label: published, source: "Wan 2022, Extended Data Table 1"},
+       efficiency: {value: 7, unit: "Top/s/W", label: published, source: "Wan 2022, Extended Data Table 1"},
+       mvm_latency: {value: 10.7, unit: "us", label: published, source: "Wan 2022, Extended Data Table 1"}}
+
+ibm_34tile:
+  # Ambrogio et al., Nature 620, 768 (2023); reused for ALBERT in Nature Communications 16 (2025).
+  # Use for accuracy, drift and recalibration, not for energy validation (attention ran off-chip;
+  # system TOPS/W partly simulated).
+  weights_per_tile: {value: 262144, unit: "", label: published, source: "ALBERT 2025, mapping (512 x 512 at 4 PCM per weight)"}
+  tile_efficiency: {value: 20, unit: "Top/s/W", label: published, source: "Ambrogio 2023, main text (Fig. 6c)", note: "analog tile only"}
+  chip_efficiency: {value: 12.4, unit: "Top/s/W", label: published, source: "Ambrogio 2023, abstract; Fig. 6a", note: "chip-sustained, speech model"}
+  albert_accuracy_gap: {value: 1.8, unit: "", label: published, source: "ALBERT 2025, abstract", note: "percentage points below floating point, GLUE average of 7 tasks"}
+  drift_loss_30d: {value: 5, unit: "", label: published, source: "ALBERT 2025, abstract; Fig. 4c", note: "percentage points over 30 days without recalibration; under 1 with recalibration"}

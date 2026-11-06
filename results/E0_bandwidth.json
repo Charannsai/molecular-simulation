@@ -1,0 +1,33 @@
+{
+  "experiment": "E0",
+  "title": "GPU memory bandwidth on the author's PC",
+  "label": "measured",
+  "method": "PyTorch 2.11.0+cu128, CUDA events, 1.5 GB float32 buffers, 30 timed reps after 5 warm-ups, median reported",
+  "context": {
+    "date": "2026-10-29T08:42:30+00:00",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5050 Laptop GPU",
+      "driver": "592.82",
+      "memory_total": "8151 MiB",
+      "max_memory_clock": "12001 MHz",
+      "max_graphics_clock": "3090 MHz"
+    },
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "on_mains_power": true
+  },
+  "copy_bandwidth_GBps": {
+    "median": 337.253864649893,
+    "min": 263.5033258234814,
+    "max": 339.48693110517405,
+    "spread_pct": 22.530091793187328,
+    "n": 30
+  },
+  "read_bandwidth_GBps": {
+    "median": 367.348884042715,
+    "min": 357.3225480595515,
+    "max": 368.29120233591266,
+    "spread_pct": 2.985895630238461,
+    "n": 30
+  }
+}

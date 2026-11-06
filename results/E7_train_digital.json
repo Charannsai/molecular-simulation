@@ -1,0 +1,59 @@
+{
+  "mode": "digital",
+  "model": "gpt2",
+  "steps": 1500,
+  "seq": 512,
+  "batch": 8,
+  "lr": 5e-05,
+  "warmup": 100,
+  "tokens_seen": 6144000,
+  "hwa_out_noise": null,
+  "hwa_weight_noise": null,
+  "analog_head": false,
+  "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU",
+  "seconds": 1508.614003419876,
+  "log": [
+    {
+      "step": 1,
+      "train_loss": 3.884924530982971,
+      "test_ppl_quick": 41.94199506479526,
+      "seconds": 1.8500187397003174
+    },
+    {
+      "step": 250,
+      "train_loss": 3.008129358291626,
+      "test_ppl_quick": 26.599168991144673,
+      "seconds": 264.32899165153503
+    },
+    {
+      "step": 500,
+      "train_loss": 3.319738030433655,
+      "test_ppl_quick": 25.811974654412232,
+      "seconds": 514.2432267665863
+    },
+    {
+      "step": 750,
+      "train_loss": 2.986325263977051,
+      "test_ppl_quick": 25.500167272881495,
+      "seconds": 765.6970610618591
+    },
+    {
+      "step": 1000,
+      "train_loss": 3.0892635583877563,
+      "test_ppl_quick": 25.26658495404277,
+      "seconds": 1012.6318366527557
+    },
+    {
+      "step": 1250,
+      "train_loss": 3.0267763137817383,
+      "test_ppl_quick": 25.096792625562454,
+      "seconds": 1260.2368004322052
+    },
+    {
+      "step": 1500,
+      "train_loss": 2.936737060546875,
+      "test_ppl_quick": 25.044930087465936,
+      "seconds": 1508.011575460434
+    }
+  ]
+}

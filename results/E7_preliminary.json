@@ -1,0 +1,22 @@
+{
+  "experiment": "E7 (preliminary)",
+  "title": "Which analog non-ideality breaks an off-the-shelf LLM",
+  "label": "estimated (simulated perplexity, AIHWKit 1.2.0)",
+  "model": "Qwen/Qwen2.5-0.5B, FP32, no noise-aware fine-tuning",
+  "dataset": "WikiText-2 raw test, first 400 lines, 2 windows of 512 tokens (1,022 predicted tokens)",
+  "setup": "every nn.Linear as AIHWKit analog layer on 256 x 256 tiles (TorchInferenceRPUConfig), ideal devices (no programming or read noise), global drift compensation; one setting switched on at a time",
+  "script": "accuracy/debug_e7.py",
+  "date": "2026-10-29",
+  "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU (WSL2 Ubuntu 26.04)",
+  "results": [
+    {"setting": "digital FP32", "ppl": 15.914},
+    {"setting": "analog, all converter effects off (is_perfect)", "ppl": 15.914},
+    {"setting": "8-bit inputs only", "ppl": 16.206},
+    {"setting": "12-bit outputs only", "ppl": 22.963},
+    {"setting": "8-bit inputs and 12-bit outputs, no output noise", "ppl": 24.491},
+    {"setting": "output noise 0.01 only", "ppl": 2797.360},
+    {"setting": "output noise 0.06 only (AIHWKit default)", "ppl": 343556263.233},
+    {"setting": "8-bit in, 12-bit out, output noise 0.06, all layers (first smoke run, 8 windows)", "ppl": 427981239.672}
+  ],
+  "notes": "Two windows only: a direction finder, not a final number. Output noise is in AIHWKit normalised units (relative to the output range). The conversion itself is exact (is_perfect matches digital)."
+}

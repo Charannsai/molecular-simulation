@@ -1,0 +1,81 @@
+{
+  "experiment": "E6",
+  "title": "Dense vs mixture-of-experts on the CIM card",
+  "label": "estimated",
+  "context_tokens": 4096,
+  "context": {
+    "date": "2026-10-29T10:12:07+00:00",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5050 Laptop GPU",
+      "driver": "592.82",
+      "memory_total": "8151 MiB",
+      "max_memory_clock": "12001 MHz",
+      "max_graphics_clock": "3090 MHz"
+    },
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "on_mains_power": false
+  },
+  "rows": [
+    {
+      "model": "llama-3.1-8b",
+      "moe": false,
+      "total_B": 8.030261248,
+      "active_B": 7.504924672,
+      "tiles_installed": 114512,
+      "tiles_active": 114512,
+      "idle_fraction": 0.0,
+      "area_mm2_hermes_class": 159400.704,
+      "card_tok_s": 252.15952981230504,
+      "card_mJ_tok": 28.175206719128997,
+      "ryzen_tok_s": 34.5326941075634,
+      "ryzen_fits": true,
+      "area_per_active_B": 21239.480869768817
+    },
+    {
+      "model": "qwen2.5-32b",
+      "moe": false,
+      "total_B": 32.7634176,
+      "active_B": 31.98484992,
+      "tiles_installed": 488040,
+      "tiles_active": 488040,
+      "idle_fraction": 0.0,
+      "area_mm2_hermes_class": 679351.6799999999,
+      "card_tok_s": 126.08200311776764,
+      "card_mJ_tok": 60.640221273557835,
+      "ryzen_tok_s": 8.578695004464818,
+      "ryzen_fits": true,
+      "area_per_active_B": 21239.795768908833
+    },
+    {
+      "model": "qwen3-30b-a3b",
+      "moe": true,
+      "total_B": 30.532110336,
+      "active_B": 3.041855488,
+      "tiles_installed": 461328,
+      "tiles_active": 46608,
+      "idle_fraction": 0.8989699302882115,
+      "area_mm2_hermes_class": 642168.576,
+      "card_tok_s": 306.2635792370817,
+      "card_mJ_tok": 21.657385897553922,
+      "ryzen_tok_s": 78.24387802338043,
+      "ryzen_fits": true,
+      "area_per_active_B": 211110.81000834185
+    },
+    {
+      "model": "gpt-oss-120b",
+      "moe": true,
+      "total_B": 116.78904864,
+      "active_B": 5.1313104,
+      "tiles_installed": 2016072,
+      "tiles_active": 87624,
+      "idle_fraction": 0.9565372665261955,
+      "area_mm2_hermes_class": 2806372.224,
+      "card_tok_s": 406.34961254401907,
+      "card_mJ_tok": 17.01842342373376,
+      "ryzen_tok_s": 51.4604408420586,
+      "ryzen_fits": true,
+      "area_per_active_B": 546911.4135056027
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite the preprint below."
+title: "molecular-simulation: a labelled-parameter simulator for molecular memristor compute-in-memory and local LLM inference"
+authors:
+  - family-names: Pathuri
+    given-names: Charan Sai
+    email: pathurisai31@gmail.com
+    affiliation: "Independent researcher, Hyderabad, India"
+version: 1.0.0
+date-released: 2026-11-06
+license: MIT
+repository-code: "https://github.com/Charannsai/molecular-simulation"
+keywords:
+  - compute-in-memory
+  - molecular memristor
+  - analog AI
+  - large language models
+  - energy efficiency
+preferred-citation:
+  type: article
+  title: "How Far Can Molecular Memristor Compute-in-Memory Take Local LLM Inference? A Break-Even Study with Measured Baselines and Emulated Task Accuracy"
+  authors:
+    - family-names: Pathuri
+      given-names: Charan Sai
+  year: 2026
+  notes: "arXiv preprint (identifier to be added after submission)"

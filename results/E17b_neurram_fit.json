@@ -1,0 +1,70 @@
+{
+  "experiment": "E17b",
+  "title": "NeuRRAM energy follows input bits x output bits (bit-serial inputs)",
+  "label": "estimated fit to published points",
+  "fit": {
+    "fixed_nJ": 2.2078725573141282,
+    "nJ_per_bit_product": 0.20863305338313284
+  },
+  "rows": [
+    {
+      "in_bits": 1,
+      "out_bits": 3,
+      "measured_nJ": 3.0481860465116277,
+      "fit_nJ": 2.833771717463527,
+      "fit_error_pct": -7.034161490683244,
+      "e17_linear_nJ": 3.097231,
+      "e17_linear_error_pct": 1.608988189697258
+    },
+    {
+      "in_bits": 2,
+      "out_bits": 5,
+      "measured_nJ": 3.2768,
+      "fit_nJ": 4.294203091145457,
+      "fit_error_pct": 31.048678318647973,
+      "e17_linear_nJ": 5.162051666666667,
+      "e17_linear_error_pct": 57.53331502278645
+    },
+    {
+      "in_bits": 4,
+      "out_bits": 6,
+      "measured_nJ": 8.192,
+      "fit_nJ": 7.215065838509316,
+      "fit_error_pct": -11.92546583850932,
+      "e17_linear_nJ": 6.194462,
+      "e17_linear_error_pct": -24.384008789062506
+    },
+    {
+      "in_bits": 8,
+      "out_bits": 10,
+      "measured_nJ": 18.72457142857143,
+      "fit_nJ": 18.898516827964755,
+      "fit_error_pct": 0.9289686552072629,
+      "e17_linear_nJ": 10.324103333333333,
+      "e17_linear_error_pct": -44.86333974202474
+    }
+  ],
+  "mean_abs_error_pct": {
+    "bit_product_fit": 12.73431857576195,
+    "e17_linear_rule": 32.09741293589274
+  },
+  "passes_30pct": {
+    "bit_product_fit": 3,
+    "e17_linear_rule": 2,
+    "of": 4
+  },
+  "conclusion": "The miss is an architecture difference (bit-serial inputs and integrate-and-fire neurons), not an error in the pulse-width model used for our chip. Our design uses HERMES-style pulse-width inputs, which E3 and E17 C1 validate within 10%.",
+  "context": {
+    "date": "2026-11-06T05:46:02+00:00",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5050 Laptop GPU",
+      "driver": "610.91",
+      "memory_total": "8151 MiB",
+      "max_memory_clock": "12001 MHz",
+      "max_graphics_clock": "3090 MHz"
+    },
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "on_mains_power": true
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "experiment": "E17",
+  "title": "More chip checks: IBM 34-tile chip and NeuRRAM across precisions",
+  "label": "estimated (model) vs published (chip data)",
+  "tolerance_pct": 30.0,
+  "per_output_pJ_from_E3": 48.394234374999996,
+  "checks": [
+    {
+      "id": "C1",
+      "what": "IBM 34-tile chip, analog tile efficiency (512x512 weights, 4 PCM per weight)",
+      "pred": 18.09627396680785,
+      "actual": 20,
+      "unit": "TOPS/W",
+      "array_share": 0.14477019173446284,
+      "error_pct": -9.51863016596075,
+      "pass": true
+    },
+    {
+      "id": "C2 1/4/3 none",
+      "what": "NeuRRAM MVM energy, 1-bit in, 3-bit out, rule none",
+      "pred": 12.388924,
+      "actual": 3.0481860465116277,
+      "unit": "nJ",
+      "error_pct": 306.435952758789,
+      "pass": false
+    },
+    {
+      "id": "C2 1/4/3 linear",
+      "what": "NeuRRAM MVM energy, 1-bit in, 3-bit out, rule linear",
+      "pred": 3.097231,
+      "actual": 3.0481860465116277,
+      "unit": "nJ",
+      "error_pct": 1.608988189697258,
+      "pass": true
+    },
+    {
+      "id": "C2 1/4/3 walden",
+      "what": "NeuRRAM MVM energy, 1-bit in, 3-bit out, rule walden",
+      "pred": 0.0241971171875,
+      "actual": 3.0481860465116277,
+      "unit": "nJ",
+      "error_pct": -99.206179779768,
+      "pass": false
+    },
+    {
+      "id": "C2 2/4/5 none",
+      "what": "NeuRRAM MVM energy, 2-bit in, 5-bit out, rule none",
+      "pred": 12.388924,
+      "actual": 3.2768,
+      "unit": "nJ",
+      "error_pct": 278.0799560546875,
+      "pass": false
+    },
+    {
+      "id": "C2 2/4/5 linear",
+      "what": "NeuRRAM MVM energy, 2-bit in, 5-bit out, rule linear",
+      "pred": 5.162051666666667,
+      "actual": 3.2768,
+      "unit": "nJ",
+      "error_pct": 57.53331502278645,
+      "pass": false
+    },
+    {
+      "id": "C2 2/4/5 walden",
+      "what": "NeuRRAM MVM energy, 2-bit in, 5-bit out, rule walden",
+      "pred": 0.09678846875,
+      "actual": 3.2768,
+      "unit": "nJ",
+      "error_pct": -97.04625034332275,
+      "pass": false
+    },
+    {
+      "id": "C2 4/4/6 none",
+      "what": "NeuRRAM MVM energy, 4-bit in, 6-bit out, rule none",
+      "pred": 12.388924,
+      "actual": 8.192,
+      "unit": "nJ",
+      "error_pct": 51.23198242187499,
+      "pass": false
+    },
+    {
+      "id": "C2 4/4/6 linear",
+      "what": "NeuRRAM MVM energy, 4-bit in, 6-bit out, rule linear",
+      "pred": 6.194462,
+      "actual": 8.192,
+      "unit": "nJ",
+      "error_pct": -24.384008789062506,
+      "pass": true
+    },
+    {
+      "id": "C2 4/4/6 walden",
+      "what": "NeuRRAM MVM energy, 4-bit in, 6-bit out, rule walden",
+      "pred": 0.1935769375,
+      "actual": 8.192,
+      "unit": "nJ",
+      "error_pct": -97.6370002746582,
+      "pass": false
+    },
+    {
+      "id": "C2 8/4/10 none",
+      "what": "NeuRRAM MVM energy, 8-bit in, 10-bit out, rule none",
+      "pred": 12.388924,
+      "actual": 18.72457142857143,
+      "unit": "nJ",
+      "error_pct": -33.836007690429696,
+      "pass": false
+    },
+    {
+      "id": "C2 8/4/10 linear",
+      "what": "NeuRRAM MVM energy, 8-bit in, 10-bit out, rule linear",
+      "pred": 10.324103333333333,
+      "actual": 18.72457142857143,
+      "unit": "nJ",
+      "error_pct": -44.86333974202474,
+      "pass": false
+    },
+    {
+      "id": "C2 8/4/10 walden",
+      "what": "NeuRRAM MVM energy, 8-bit in, 10-bit out, rule walden",
+      "pred": 3.097231,
+      "actual": 18.72457142857143,
+      "unit": "nJ",
+      "error_pct": -83.45900192260743,
+      "pass": false
+    }
+  ],
+  "neurram_rules": {
+    "none": {
+      "passes": 0,
+      "of": 4,
+      "mean_abs_error_pct": 167.3959747314453
+    },
+    "linear": {
+      "passes": 2,
+      "of": 4,
+      "mean_abs_error_pct": 32.09741293589274
+    },
+    "walden": {
+      "passes": 0,
+      "of": 4,
+      "mean_abs_error_pct": 94.3371080800891
+    }
+  },
+  "context": {
+    "date": "2026-11-05T12:29:09+00:00",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5050 Laptop GPU",
+      "driver": "610.91",
+      "memory_total": "8151 MiB",
+      "max_memory_clock": "12001 MHz",
+      "max_graphics_clock": "3090 MHz"
+    },
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "on_mains_power": false
+  }
+}

@@ -1,0 +1,113 @@
+# Memory-device parameters for the compute-in-memory model (29 Oct 2026).
+# Every value: value, unit, label (measured / published / estimated / assumed), source, optional note and range.
+# "(verify)" in a note = read off a figure, or only from a secondary source; check against the full paper.
+# Assumed values are things no source reports; each has a range because the break-even study sweeps it.
+
+molecular:
+  # Sharma et al., "Linear symmetric self-selecting 14-bit kinetic molecular memristors", Nature 633, 560 (2024),
+  # DOI 10.1038/s41586-024-07902-2. Ru-azo complex film, Au electrodes, IISc Bangalore. Main text paywalled;
+  # open Supplementary Information read in full.
+  conductance_levels:
+    {value: 16520, unit: "", label: published, source: "Sharma 2024, abstract and Fig. 1b,e", note: "about 14 bits per device"}
+  g_min:
+    {value: 0.4, unit: "uS", label: published, source: "Sharma 2024, Fig. 1c", note: "lowest level, read from plot (verify)"}
+  g_max:
+    {value: 6, unit: "mS", label: published, source: "Sharma 2024, Fig. 1b, 2a, 2c", note: "top of the range, read from plot (verify). Very high: about 0.6 mA per cell at 0.1 V"}
+  level_spacing:
+    {value: 0.35, unit: "uS", label: published, source: "Sharma 2024, Fig. 1e", note: "read from plot (verify); roughly constant (linear updates)", range: [0.2, 0.5]}
+  read_noise_sigma:
+    {value: 0.02, unit: "uS", label: published, source: "Sharma 2024, Fig. 1c,d,e (2,000 reads per level)", note: "absolute sigma, read from plot (verify); about 10x below the level spacing", range: [0.01, 0.03]}
+  write_rmse_single_pulse:
+    {value: 42, unit: "nS", label: published, source: "Sharma 2024, Fig. 2d inset", note: "upper bound; one pulse, no program-verify loop"}
+  program_verify_iterations:
+    {value: 1, unit: "", label: published, source: "Sharma 2024 SI, note on single-pulse writing", note: "each cell written individually with one pulse"}
+  write_threshold:
+    {value: 830, unit: "mV", label: published, source: "Sharma 2024, Extended Data Fig. 2; SI p.11", note: "below this, any pulse leaves the cell unchanged (enables selector-less arrays)"}
+  write_voltage:
+    {value: 900, unit: "mV", label: published, source: "Sharma 2024 SI, Fig. S7", note: "single-pulse window 900 to 1205 mV", range: [900, 1205]}
+  write_pulse_width:
+    {value: 80, unit: "ns", label: published, source: "Sharma 2024, Fig. 1b; SI Fig. S7", note: "single-pulse window 80 ns to 3.18 us", range: [80, 3180]}
+  read_voltage:
+    {value: 0.1, unit: "V", label: published, source: "Sharma 2024, Fig. 4a; SI readout note", note: "VMM inputs 5 to 125 mV; single-device reads at 500 mV", range: [0.005, 0.5]}
+  endurance:
+    {value: 1.0e9, unit: "", label: published, source: "Sharma 2024, Fig. 2a; SI Fig. S10", note: "write cycles; only 24 cycles read back; noise rose up to 3x after many cycles"}
+  retention_per_level:
+    {value: 11, unit: "day", label: published, source: "Sharma 2024, Fig. 2b", note: "no deterioration shown over the test"}
+  retention_matrix:
+    {value: 7, unit: "month", label: published, source: "Sharma 2024 SI, Fig. S23", note: "unpowered; error under 500 nS, about 1 to 2 level spacings"}
+  temperature_tested_max:
+    {value: 290, unit: "K", label: published, source: "Sharma 2024, Fig. 3c; SI Fig. S17c", note: "tested 160 to 290 K only; no data above room temperature"}
+  cell_width:
+    {value: 1.05, unit: "um", label: published, source: "Sharma 2024, Fig. 1a legend", note: "cross-point 1.05 x 1.1 um; pitch not stated"}
+  cell_length:
+    {value: 1.1, unit: "um", label: published, source: "Sharma 2024, Fig. 1a legend"}
+  wire_resistance_per_cell:
+    {value: 0.46, unit: "ohm", label: published, source: "Sharma 2024 SI, Sections S2 and S4", note: "row segment; column 0.39 ohm. With mS cells, IR drop matters"}
+  demonstrated_array_rows:
+    {value: 64, unit: "", label: published, source: "Sharma 2024, abstract and Fig. 4", note: "64 x 64 selector-less crossbar"}
+  demonstrated_array_cols:
+    {value: 64, unit: "", label: published, source: "Sharma 2024, abstract and Fig. 4"}
+  crossbar_snr:
+    {value: 73, unit: "dB", label: published, source: "Sharma 2024, abstract and Fig. 4f", note: "73 to 77 dB across matrix types", range: [73, 77]}
+  crossbar_effective_bits:
+    {value: 12, unit: "", label: published, source: "Sharma 2024, Fig. 4f; SI Fig. S8", note: "12 to 13.3 bits on 64-input sums", range: [12, 13.3]}
+  authors_system_efficiency:
+    {value: 4.1, unit: "Top/s/W", label: published, source: "Sharma 2024 SI, Estimation of power efficiency", note: "authors' ESTIMATE from datasheet ADC and op-amp powers, not measured. The 460x claim compares this with a 2017 CPU; never reuse it"}
+
+  # Not reported by any source read: assumptions for the break-even sweeps.
+  device_pitch:
+    {value: 100, unit: "nm", label: assumed, source: "project assumption (Oct 2026)", note: "demonstrated cell is about 1.1 um; an earlier digital device of the same chemistry reached about 60 nm2 (verify)", range: [50, 1100]}
+  g_max_scaled:
+    {value: 10, unit: "uS", label: assumed, source: "project assumption for LLM-scale arrays", note: "the demonstrated 6 mS window is far too high for low-energy reads; sweep down to PCM/RRAM-like windows", range: [1, 6000]}
+  relative_read_noise:
+    {value: 1, unit: "percent", label: assumed, source: "project assumption", note: "the paper gives only absolute sigma; plot suggests low percent at high G", range: [0.1, 5]}
+  device_variation:
+    {value: 5, unit: "percent", label: assumed, source: "project assumption", note: "SI Fig. S8 is qualitative only", range: [1, 10]}
+  vmm_step_time:
+    {value: 50, unit: "ns", label: assumed, source: "project assumption", note: "no measured VMM latency; the authors' designs assume 20 to 50 MHz", range: [10, 100]}
+  array_yield:
+    {value: 99, unit: "percent", label: assumed, source: "project assumption", note: "only 64 x 64 shown", range: [90, 99.9]}
+
+pcm:
+  # IBM 14 nm PCM as used in HERMES (Le Gallo et al., Nature Electronics 2023, arXiv:2212.02872)
+  # and 90 nm PCM in Joshi et al., Nature Communications 11, 2473 (2020).
+  g_min:
+    {value: 0.1, unit: "uS", label: published, source: "Le Gallo 2023, Extended Data Table I", note: "resistance range 100 kohm to 10 Mohm"}
+  g_max:
+    {value: 10, unit: "uS", label: published, source: "Le Gallo 2023, Extended Data Table I"}
+  devices_per_weight:
+    {value: 4, unit: "", label: published, source: "Le Gallo 2023, Section II", note: "2 per polarity"}
+  program_verify_iterations:
+    {value: 30, unit: "", label: published, source: "Le Gallo 2023, Methods", note: "maximum; Joshi 2020 used up to 55"}
+  program_pulse:
+    {value: 125, unit: "ns", label: published, source: "Le Gallo 2023, Methods", note: "iterative pulse, 125 to 700 uA"}
+  verify_read_time:
+    {value: 768, unit: "ns", label: published, source: "Le Gallo 2023, Methods", note: "512 ns read plus 256 ns precharge at 0.2 V"}
+  program_noise_relative:
+    {value: 3.8, unit: "percent", label: published, source: "Joshi 2020, Results", note: "of Gmax; equals 0.94 uS sigma on 90 nm PCM"}
+  drift_nu:
+    {value: 0.06, unit: "", label: published, source: "Joshi 2020, Results (drift)", note: "general PCM range 0.01 to 0.10 (ALBERT 2025, Methods)", range: [0.01, 0.10]}
+  effective_weight_bits:
+    {value: 3.5, unit: "", label: published, source: "Le Gallo 2023, Section IV", note: "about 3 to 4 bits", range: [3, 4]}
+
+rram:
+  # NeuRRAM (Wan et al., Nature 608, 504 (2022)) and Rao et al., Nature 615, 823 (2023).
+  g_min:
+    {value: 1, unit: "uS", label: published, source: "Wan 2022, Methods (write-verify)"}
+  g_max:
+    {value: 40, unit: "uS", label: published, source: "Wan 2022, Methods", note: "1 to 40 uS for CNNs; 1 to 30 uS for LSTM"}
+  devices_per_weight:
+    {value: 2, unit: "", label: published, source: "Wan 2022, Methods", note: "differential pair, about 4-bit equivalent"}
+  pulses_per_cell:
+    {value: 8.52, unit: "", label: published, source: "Wan 2022, Methods", note: "average write-verify pulses; 99% of cells converge"}
+  write_verify_time_per_cell:
+    {value: 56, unit: "us", label: published, source: "Wan 2022, Methods", note: "authors' estimate if integrated on chip"}
+  relaxation_sigma:
+    {value: 2.8, unit: "uS", label: published, source: "Wan 2022, Methods; Extended Data Fig. 3", note: "about 2 uS after 3 re-program iterations"}
+  cell_area:
+    {value: 1.69, unit: "um**2", label: published, source: "Wan 2022, Extended Data Table 1", note: "130 nm 1T1R"}
+  max_levels:
+    {value: 2048, unit: "", label: published, source: "Rao 2023, abstract", note: "256 x 256 arrays on CMOS from a commercial foundry"}
+
+# Missing for PCM and RRAM (sources paywalled): read energy per cell, programming energy, endurance, pitch.
+# The CIM model derives cell read energy from conductance, read voltage and integration time instead.

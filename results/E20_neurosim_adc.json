@@ -1,0 +1,649 @@
+{
+ "experiment": "E20",
+ "title": "NeuroSim cross-check of our converter assumptions (SAR ADC model of DNN+NeuroSim V1.4)",
+ "label": "estimated (NeuroSim circuit model) vs our assumptions",
+ "source": "DNN_NeuroSim_V1.4 (github.com/neurosim/DNN_NeuroSim_V1.4), SarADC.cpp driven directly by neurosim/adc_probe.cpp; LSTP devices, 1 GHz clock, one converter",
+ "column": "781 ohm = a 512-row column at a 10 uS window with a mean 2.5 uS per active cell (adds the column read current)",
+ "ours": {
+  "converter_area_um2_design_point": 400,
+  "converter_area_um2_aggressive": 200,
+  "column_circuit_area_um2": 100,
+  "periph_energy_per_output_pJ": 48.4,
+  "periph_energy_note": "calibrated on IBM HERMES (measured chip, 14 nm), covers drivers, integrator, converter and local digital per output"
+ },
+ "comparison": [
+  {
+   "node_nm": 22,
+   "bits": 10,
+   "neurosim_adc_area_um2": 217.9,
+   "neurosim_adc_energy_pJ": 0.107,
+   "neurosim_adc_plus_column_pJ": 1.227,
+   "conversion_ns": 11.0
+  },
+  {
+   "node_nm": 22,
+   "bits": 12,
+   "neurosim_adc_area_um2": 255.4,
+   "neurosim_adc_energy_pJ": 0.141,
+   "neurosim_adc_plus_column_pJ": 1.464,
+   "conversion_ns": 13.0
+  },
+  {
+   "node_nm": 14,
+   "bits": 10,
+   "neurosim_adc_area_um2": 190.1,
+   "neurosim_adc_energy_pJ": 0.063,
+   "neurosim_adc_plus_column_pJ": 1.008,
+   "conversion_ns": 11.0
+  },
+  {
+   "node_nm": 14,
+   "bits": 12,
+   "neurosim_adc_area_um2": 222.8,
+   "neurosim_adc_energy_pJ": 0.082,
+   "neurosim_adc_plus_column_pJ": 1.199,
+   "conversion_ns": 13.0
+  },
+  {
+   "node_nm": 7,
+   "bits": 10,
+   "neurosim_adc_area_um2": 57.9,
+   "neurosim_adc_energy_pJ": 0.021,
+   "neurosim_adc_plus_column_pJ": 0.695,
+   "conversion_ns": 11.0
+  },
+  {
+   "node_nm": 7,
+   "bits": 12,
+   "neurosim_adc_area_um2": 67.9,
+   "neurosim_adc_energy_pJ": 0.028,
+   "neurosim_adc_plus_column_pJ": 0.825,
+   "conversion_ns": 13.0
+  }
+ ],
+ "findings": [
+  "Converter area: NeuroSim gives 255 um2 for a 12-bit SAR at 22 nm, 223 at 14 nm, 68 at 7 nm. Our assumed converter area (400 um2 at the design point) is therefore conservative, and 200 um2 is plausible at 14 nm and below.",
+  "10-bit converters (enough per the bits test) are about 15% smaller and about 25% lower energy than 12-bit in NeuroSim's model.",
+  "Energy: NeuroSim's converter plus column read is about 1 to 1.5 pJ per conversion; our periphery energy is 48.4 pJ per output, anchored on a measured chip. Against NeuroSim's circuit view our energy figures are pessimistic; real chips measure above idealised circuit fits, so we keep the measured anchor.",
+  "Scope: this checks one component (the converter), not the whole chip. NeuroSim's whole-chip mode assumes bit-serial inputs and 1-bit weight slices, a different architecture from our pulse-width design (see E17b)."
+ ],
+ "date": "2026-11-06",
+ "rows": [
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 5.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0414636,
+   "area_um2": 124.212,
+   "latency_ns": 6.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 5.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.736746,
+   "area_um2": 124.212,
+   "latency_ns": 6.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 6.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0534233,
+   "area_um2": 142.957,
+   "latency_ns": 7.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 6.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.864586,
+   "area_um2": 142.957,
+   "latency_ns": 7.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 7.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0668256,
+   "area_um2": 161.702,
+   "latency_ns": 8.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 7.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.993869,
+   "area_um2": 161.702,
+   "latency_ns": 8.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 8.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0816705,
+   "area_um2": 180.448,
+   "latency_ns": 9.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 8.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.12459,
+   "area_um2": 180.448,
+   "latency_ns": 9.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 9.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.097958,
+   "area_um2": 199.193,
+   "latency_ns": 10.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 9.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.25676,
+   "area_um2": 199.193,
+   "latency_ns": 10.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 10.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.115688,
+   "area_um2": 217.938,
+   "latency_ns": 11.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 10.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.39037,
+   "area_um2": 217.938,
+   "latency_ns": 11.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 11.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.134861,
+   "area_um2": 236.683,
+   "latency_ns": 12.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 11.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.52543,
+   "area_um2": 236.683,
+   "latency_ns": 12.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 12.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.155476,
+   "area_um2": 255.428,
+   "latency_ns": 13.0
+  },
+  {
+   "node": "22",
+   "roadmap": "HP",
+   "bits": 12.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.66192,
+   "area_um2": 255.428,
+   "latency_ns": 13.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 5.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0423918,
+   "area_um2": 124.212,
+   "latency_ns": 6.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 5.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.653001,
+   "area_um2": 124.212,
+   "latency_ns": 6.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 6.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0532231,
+   "area_um2": 142.957,
+   "latency_ns": 7.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 6.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.765601,
+   "area_um2": 142.957,
+   "latency_ns": 7.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 7.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0651304,
+   "area_um2": 161.702,
+   "latency_ns": 8.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 7.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.879277,
+   "area_um2": 161.702,
+   "latency_ns": 8.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 8.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0781137,
+   "area_um2": 180.448,
+   "latency_ns": 9.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 8.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.994028,
+   "area_um2": 180.448,
+   "latency_ns": 9.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 9.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.092173,
+   "area_um2": 199.193,
+   "latency_ns": 10.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 9.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.10986,
+   "area_um2": 199.193,
+   "latency_ns": 10.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 10.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.107308,
+   "area_um2": 217.938,
+   "latency_ns": 11.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 10.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.22676,
+   "area_um2": 217.938,
+   "latency_ns": 11.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 11.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.12352,
+   "area_um2": 236.683,
+   "latency_ns": 12.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 11.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.34474,
+   "area_um2": 236.683,
+   "latency_ns": 12.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 12.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.140807,
+   "area_um2": 255.428,
+   "latency_ns": 13.0
+  },
+  {
+   "node": "22",
+   "roadmap": "LSTP",
+   "bits": 12.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.46379,
+   "area_um2": 255.428,
+   "latency_ns": 13.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 5.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0248046,
+   "area_um2": 108.356,
+   "latency_ns": 6.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 5.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.540406,
+   "area_um2": 108.356,
+   "latency_ns": 6.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 6.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0311311,
+   "area_um2": 124.708,
+   "latency_ns": 7.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 6.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.632666,
+   "area_um2": 124.708,
+   "latency_ns": 7.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 7.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.038084,
+   "area_um2": 141.06,
+   "latency_ns": 8.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 7.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.725552,
+   "area_um2": 141.06,
+   "latency_ns": 8.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 8.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0456633,
+   "area_um2": 157.412,
+   "latency_ns": 9.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 8.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.819065,
+   "area_um2": 157.412,
+   "latency_ns": 9.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 9.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.053869,
+   "area_um2": 173.765,
+   "latency_ns": 10.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 9.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.913204,
+   "area_um2": 173.765,
+   "latency_ns": 10.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 10.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0627011,
+   "area_um2": 190.117,
+   "latency_ns": 11.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 10.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.00797,
+   "area_um2": 190.117,
+   "latency_ns": 11.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 11.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0721596,
+   "area_um2": 206.469,
+   "latency_ns": 12.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 11.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.10336,
+   "area_um2": 206.469,
+   "latency_ns": 12.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 12.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0822445,
+   "area_um2": 222.821,
+   "latency_ns": 13.0
+  },
+  {
+   "node": "14",
+   "roadmap": "LSTP",
+   "bits": 12.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 1.19938,
+   "area_um2": 222.821,
+   "latency_ns": 13.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 5.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0084912,
+   "area_um2": 32.9952,
+   "latency_ns": 6.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 5.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.376126,
+   "area_um2": 32.9952,
+   "latency_ns": 6.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 6.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0106491,
+   "area_um2": 37.9746,
+   "latency_ns": 7.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 6.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.439557,
+   "area_um2": 37.9746,
+   "latency_ns": 7.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 7.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0130192,
+   "area_um2": 42.954,
+   "latency_ns": 8.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 7.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.5032,
+   "area_um2": 42.954,
+   "latency_ns": 8.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 8.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0156015,
+   "area_um2": 47.9334,
+   "latency_ns": 9.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 8.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.567054,
+   "area_um2": 47.9334,
+   "latency_ns": 9.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 9.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.018396,
+   "area_um2": 52.9128,
+   "latency_ns": 10.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 9.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.631121,
+   "area_um2": 52.9128,
+   "latency_ns": 10.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 10.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0214027,
+   "area_um2": 57.8921,
+   "latency_ns": 11.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 10.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.695401,
+   "area_um2": 57.8921,
+   "latency_ns": 11.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 11.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0246216,
+   "area_um2": 62.8715,
+   "latency_ns": 12.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 11.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.759892,
+   "area_um2": 62.8715,
+   "latency_ns": 12.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 12.0,
+   "colRes_ohm": 0.0,
+   "energy_pJ": 0.0280527,
+   "area_um2": 67.8509,
+   "latency_ns": 13.0
+  },
+  {
+   "node": "7",
+   "roadmap": "LSTP",
+   "bits": 12.0,
+   "colRes_ohm": 781.0,
+   "energy_pJ": 0.824596,
+   "area_um2": 67.8509,
+   "latency_ns": 13.0
+  }
+ ]
+}

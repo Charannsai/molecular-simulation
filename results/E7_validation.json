@@ -1,0 +1,70 @@
+{
+  "check": "FastAnalogLinear vs AIHWKit 1.2.0 on GPT-2 small",
+  "windows": 16,
+  "tokens": 8192,
+  "digital_ppl": 41.971094429976624,
+  "cases": [
+    {
+      "case": "converters only (8-bit in, 12-bit out)",
+      "fast": {
+        "ppl": 42.2422371527098,
+        "runs": [
+          42.2422371527098
+        ],
+        "seconds": 2.8377294540405273
+      },
+      "aihwkit": {
+        "ppl": 42.6876676497763,
+        "runs": [
+          42.6876676497763
+        ],
+        "seconds": 6.520398378372192
+      },
+      "difference_pct": -1.0434641234582376
+    },
+    {
+      "case": "readout noise 0.02",
+      "fast": {
+        "ppl": 43.382195217024176,
+        "runs": [
+          43.26309705975967,
+          43.50129337428867
+        ],
+        "seconds": 5.754955768585205
+      },
+      "aihwkit": {
+        "ppl": 42.9962739795198,
+        "runs": [
+          43.0852509292925,
+          42.9072970297471
+        ],
+        "seconds": 14.430771589279175
+      },
+      "difference_pct": 0.8975690258374414
+    },
+    {
+      "case": "PCM (PCMLikeNoiseModel), 1 day, no readout noise",
+      "fast": {
+        "ppl": 53.76587011152067,
+        "runs": [
+          54.06008386744186,
+          53.47165635559947
+        ],
+        "seconds": 5.187626600265503
+      },
+      "aihwkit": {
+        "ppl": 53.71054729937164,
+        "runs": [
+          52.93608993949166,
+          54.48500465925162
+        ],
+        "seconds": 32.86262035369873
+      },
+      "difference_pct": 0.10300176581830023,
+      "aihwkit_per_tile_scaling": {
+        "ppl": 3473.8340726722017
+      }
+    }
+  ],
+  "gpu": "NVIDIA GeForce RTX 5050 Laptop GPU"
+}

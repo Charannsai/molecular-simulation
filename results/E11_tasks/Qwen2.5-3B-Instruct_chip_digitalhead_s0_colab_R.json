@@ -1,0 +1,46 @@
+{
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "mode": "chip",
+  "n_per_task": 200,
+  "tag": "colab_R",
+  "head": "digital",
+  "seed": 0,
+  "readout_noise": 0.02,
+  "layers_on_chip": 252,
+  "devices": 5549064192,
+  "ideal_devices": false,
+  "perfect_converters": false,
+  "tile_scaling": false,
+  "input_bits": null,
+  "output_bits": null,
+  "gpu": "Tesla T4",
+  "dtype": "bfloat16",
+  "date": "2026-11-06T08:30:46+00:00",
+  "tasks": {
+    "arc_easy": {
+      "accuracy": 0.4,
+      "n": 200,
+      "seconds": 207.5823974609375
+    },
+    "arc_challenge": {
+      "accuracy": 0.285,
+      "n": 200,
+      "seconds": 240.05546069145203
+    },
+    "hellaswag": {
+      "accuracy": 0.31,
+      "n": 200,
+      "seconds": 534.892655134201
+    },
+    "mmlu": {
+      "accuracy": 0.325,
+      "n": 200,
+      "seconds": 665.9113140106201
+    },
+    "wikitext": {
+      "perplexity": 190.0285384026501,
+      "seconds": 113.51909112930298
+    }
+  },
+  "seconds": 1784.2965772151947
+}
